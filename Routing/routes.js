@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var homepageController = require('../controllers/homepageController');
+var upload = require('../config/multer');
+
+
+
 
 router.get('/', homepageController.loadHomepage);
 
 
 //////////////////////////////////////////////////////////////////////////
-///////////////////           My Part                /////////////////////
+///////////////////         Youssef Part                /////////////////////
 //////////////////////////////////////////////////////////////////////////
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
@@ -28,6 +32,13 @@ businessController.loadProfile);
 router.post('/BusinessProvider', function(req,res){
 	res.redirect('/BusinessProvider/Profile');
 });
+///////////////////////////////////////////////////////////////////////////////
+/////////////         Amr Part                /////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
+
+router.post('/AddService',upload.single('file'),businessController.AddService);
+
+router.get('/DeleteService/:index',businessController.DeleteService);
 
 module.exports = router;
