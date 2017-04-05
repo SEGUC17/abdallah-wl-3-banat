@@ -37,5 +37,5 @@ isApproved:{
 services:[{name:String, description:String, price:Number, picture:String}]
 })
 
-var business = mongoose.model('business',businessSchema,'business');
+var business = mongoose.model('businesses',businessSchema);
 module.exports = business;

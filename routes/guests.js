@@ -6,6 +6,5 @@ router.get('/',function(req,res){
   res.send('HOMEPAGE');
 })
 
-router.get('/Businesses/:id', guestsController.loadBusiness);
 
 module.exports = router;

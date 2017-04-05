@@ -8,7 +8,7 @@ var user = require('../models/user');
 var adminsController = {
 
 
- /////////////////////// 	 	DataBase Functions		\\\\\\\\\\\\\\\\\\\\\\\\   
+ /////////////////////// 	vv 	DataBase Functions  vv	\\\\\\\\\\\\\\\\\\\\\\\\   
 
 }
 

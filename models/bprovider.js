@@ -14,5 +14,5 @@ var bproviderSchema = mongoose.Schema({
 
 
 
-var bprovider = mongoose.model('bprovider',bproviderSchema,'bprovider');
+var bprovider = mongoose.model('bproviders',bproviderSchema);
 module.exports = bprovider;
