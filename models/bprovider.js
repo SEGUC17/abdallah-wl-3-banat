@@ -1,16 +1,13 @@
 var mongoose = require('mongoose');
 
 var bproviderSchema = mongoose.Schema({
-  username:{
+  uid:{
     type:String,
-    required:true,
-
-  },
-  password:{
-    type:String,
+    unique: true
   },
   email:{
     type:String,
+    unique: true
   }
 
 })
@@ -19,8 +16,3 @@ var bproviderSchema = mongoose.Schema({
 
 var bprovider = mongoose.model('bprovider',bproviderSchema,'bprovider');
 module.exports = bprovider;
-
-module.exports.getBusProvider = function(username,callback){
-    var query = {username: username};
-    bprovider.findOne(query, callback);
-};

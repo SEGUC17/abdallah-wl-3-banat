@@ -2,13 +2,14 @@ var business = require('../models/business');
 var bprovider = require('../models/bprovider');
 var clients = require('../models/clients');
 var admin = require('../models/admin');
+var user = require('../models/user');
 
 
-var homepageController = {
-  loadHomepage : function(req,res){
+var adminsController = {
 
-    res.render('index');
-  }
+
+ /////////////////////// 	 	DataBase Functions		\\\\\\\\\\\\\\\\\\\\\\\\   
+
 }
 
-module.exports = homepageController;
+module.exports = adminsController;

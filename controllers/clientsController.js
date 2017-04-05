@@ -1,8 +1,9 @@
 var business = require('../models/business');
 var bprovider = require('../models/bprovider');
 var clients = require('../models/clients');
+var user = require('../models/user');
 
-var guestController = {
+var clientsController = {
   
   	loadBusiness : function(req,res){
   		//get business provider shit from the database 
@@ -11,8 +12,15 @@ var guestController = {
   		business.getBusiness(req.params.id,function(err,Profile){
 
   			res.json(Profile);	
+  			
   		});    	
-  	}
+  	},
+/////////////////////// 	 	DataBase Functions		\\\\\\\\\\\\\\\\\\\\\\\\
+
+	getBusiness : function(id,callback){
+    	var query = {bproviderid: id};
+    	business.findOne(query, callback);
+	}
 }
 
-module.exports = guestController;
+module.exports = clientsController;

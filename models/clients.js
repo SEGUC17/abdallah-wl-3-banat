@@ -1,32 +1,31 @@
 var mongoose = require('mongoose');
 var clientsSchema = mongoose.Schema({
-firstname:{
+uid:{
   type:String,
+  unique: true
+},
+firstname:{
+  type:String
 },
 lastname:{
-  type:String,
-},
-username:{
-  type:String,
-},
-password:{
-  type:String,
+  type:String
 },
 email:{
   type:String,
+  unique: true
 },
 address:{
-  type:String,
+  type:String
 },
 creditcardinfo:{
-  type:String,
+  type:String
 },
 birthdate:{
-  type:String,
+  type:String
 },
 isBanned:{
   type:Boolean,
-  default:false,
+  default:false
 }
 
 

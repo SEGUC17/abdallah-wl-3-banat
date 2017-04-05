@@ -5,43 +5,37 @@ bproviderid:{
 },
 businessName:{
   type:String,
+  required:true,
+  unique:true
 },
 location:{
-  type:String,
+  type:String
 },
 phone:{
-  type:Number,
+  type:Number
 },
+ratingsGiven:[{type:Number}],
 rating:{
-  type:Number,
+  type:Number
 },
-announcements:[],
-reviews:[],
+announcements:[{type:String}],
+reviews:[{type:String}],
 description:{
-  type:String,
+  type:String
 },
 profilepicture:{
-  type:String,
+  type:String
 },
 info:{
-  type:String,
+  type:String
 },
-questions:[],
+questions:[{question:String, answer:String}],
 isApproved:{
   type:Boolean,
-  default:false,
+  default:false
 },
-services:[]
-
-
-
-
+services:[{name:String, description:String, price:Number, picture:String}]
 })
 
 var business = mongoose.model('business',businessSchema,'business');
 module.exports = business;
-
-module.exports.getBusiness = function(id,callback){
-    var query = {bproviderid: id};
-    business.findOne(query, callback);
-};
