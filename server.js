@@ -5,6 +5,7 @@ var cors = require('cors');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var config = require('./config/database');
+var expressValidator = require('express-validator');
 const port = 8080;
 
 mongoose.connect(config.database);
