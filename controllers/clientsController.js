@@ -4,7 +4,7 @@ const business = require('../models/business');
 var clientsController = {
 
   loadBusiness : function(req,res){
-  		clientsController.getBusiness("123",function(err,BusProfile){
+  		clientsController.getBusiness(req.params.id,function(err,BusProfile){
             if(err) 
                 res.json("There's an internal mongoose error :" + err);
             else 
