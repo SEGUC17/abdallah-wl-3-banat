@@ -6,22 +6,22 @@ const user = require('../models/user');
 
 var bprovidersController = {
 
-
 answerQuestion: function(req,res){
-	var id = req.body.uid;
+	
+    var id = req.user._id;
     var newAnswer = req.body.answer;
     var questionid = req.param('id');
-    bprovider.findOne({uid:id},function(err,provider){
-        if(err) throw err;
+ bprovider.findOne({uid:id},function(err,provider){
+         if(err) throw err;
         if(!provider)
         return res.json({msg:'provider not found'});
-     var idd = provider._id;
-     business.findOne({bproviderid:idd},function(err,result){
+     business.findOne({bproviderid:provider._id},function(err,result){
          if(err) throw err;
          if(!result) return res.json({msg:'business not found'});
          result.questions.forEach(function(question){
-             if(question._id == questionid)
-             question['answer'] = newAnswer;
+             if(question._id == questionid){
+    question['answer'] = newAnswer; 
+          }
          })
          result.save(function(err,result){
          })
@@ -30,7 +30,7 @@ answerQuestion: function(req,res){
     })
 
 }
-	
+
 
 }
 	

@@ -6,7 +6,7 @@ const passport = require('passport');
 var bprovidersController = require('../controllers/bprovidersController');
 
 
-router.post('/answerQuestion',bprovidersController.answerQuestion);
+router.post('/answerQuestion',passport.authenticate('jwt',{session:false}),bprovidersController.answerQuestion);
 
 
 module.exports = router;
