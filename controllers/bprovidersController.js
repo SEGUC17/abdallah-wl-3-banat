@@ -118,7 +118,6 @@ viewTop: function(req, res){
 
 }
 
-};
 
 
 module.exports = bprovidersController;
