@@ -18,8 +18,8 @@ viewAll: function(req, res){
 },
 
 viewTop: function(req, res){
-	var q = business.find({}).sort({'rating': -1}).limit(Number(10));
-	q.exec(function(err, posts) {
+	var command = business.find({}).sort({'rating': -1}).limit(Number(10));
+	command.exec(function(err, posts) {
 
 		
 		if(err){
