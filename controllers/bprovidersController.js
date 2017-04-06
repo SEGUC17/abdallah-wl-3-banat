@@ -5,10 +5,8 @@ var bprovidersController = {
   viewQuestions: function(req, res){
     var bid = req.param('businessid');
  	 business.findOne({_id: bid}, (err, Business) => {
-      if(err) {
-        res.json({success: false, msg: "Business not found"});
-        throw err;
-      }
+      if(err) return res.json({msg: "Invalid parameter"});
+      if(!Business) return res.json({msg: "Business not found"});
       res.send(Business.questions);
     });
   }
