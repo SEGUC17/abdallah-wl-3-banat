@@ -2,7 +2,6 @@ const business = require('../models/business');
 const bprovider = require('../models/bprovider');
 const user = require('../models/user');
 
-var crypto = require('crypto');
 
 
 
@@ -32,7 +31,7 @@ return res.json({susccess:false,msg:'Invalid paramaters'});
    
     }
        if(req.body.email){
-           bproviders.findOneAndUpdate({uid:req.user._id},{$set:{email:req.body.email}},{new:true},function(err,res){
+           bprovider.findOneAndUpdate({uid:req.user._id},{$set:{email:req.body.email}},{new:true},function(err,res){
   if(err){
     return res.json({susccess:false,msg:'Invalid paramaters'});
   }else{
@@ -42,69 +41,100 @@ return res.json({susccess:false,msg:'Invalid paramaters'});
     
        }
            if(req.body.bName){
-             business.findOneAndUpdate({bproviderid:req.user._id},{$set:{businessName:req.body.bName}},{new:true},function(err,res){
+                    var x = res;
+
+    var n = req.body.bName;
+ 
+bprovider.findOne({uid:req.user._id},function(req,res){
+   
+  if(res){
+  
+ business.findOneAndUpdate({bproviderid:res._id},{$set:{businessName:n}},{new:true},function(err,res){
   if(err){
     
-return res.json({susccess:false,msg:'Invalid paramaters'});
+return x.json({susccess:false,msg:'Invalid paramaters'});
   }else{
      
   }
         
     })
-   
-           }
+  } 
+  })
+           
+          }
+           
                if(req.body.location){
-                    business.findOneAndUpdate({bproviderid:req.user._id},{$set:{location:req.body.location}},{new:true},function(err,res){
-  if(err){
-return res.json({susccess:false,msg:'Invalid paramaters'});
-  }else{
-     
-  }
-        
-    })
+                     var x = res;
 
-               }
-                   if(req.body.phone){
-                       
-                       business.findOneAndUpdate({bproviderid:req.user._id},{$set:{phone:req.body.phone}},{new:true},function(err,res){
+                 var n = req.body.location;
+               bprovider.findOne({uid:req.user._id},function(req,res){
+                 if(res){
+               business.findOneAndUpdate({bproviderid:res._id},{$set:{location:n}},{new:true},function(err,res){
   if(err){
-    return  res.json({success:false,msg:'Invalid parameters'})
+return x.json({susccess:false,msg:'Invalid paramaters'});
   }else{
      
   }
         
     })
- 
+                 }
+               })
+               }
+                   if(req.body.phone) {
+                      var x = res;
+
+                     var n = req.body.phone;
+                     bprovider.findOne({uid:req.user._id},function(req,res){
+                       if(res){
+                       business.findOneAndUpdate({bproviderid:res._id},{$set:{phone:n}},{new:true},function(err,res){
+  if(err){
+    return  x.json({susccess:false,msg:'Invalid paramaters'});
+  }else{
+     
+  }
+        
+    })
+                       }
+                     })
                    }
                      if(req.body.info){
- business.findOneAndUpdate({bproviderid:req.user._id},{$set:{info:req.body.info}},{new:true},function(err,res){
+       var x = res;
+                 var n = req.body.info;
+                 bprovider.findOne({uid:req.user._id},function(req,res){
+                  if(res){
+ business.findOneAndUpdate({bproviderid:res._id},{$set:{info:n}},{new:true},function(err,res){
   if(err){
-return res.json({susccess:false,msg:'Invalid paramaters'});
+return x.json({susccess:false,msg:'Invalid paramaters'});
   }else{
      
   }
         
     })
-                         
+                  }
+                 })
                      }
                
                   
 },
     editPP:function(req,res){
           if(req.file){
+var x = res;
                              var img = req.file.filename;
-                             
+          bprovider.findOne({uid:req.user._id},function(req,res){
+if(res){
       business.findOneAndUpdate({bproviderid:req.user._id},{$set:{profilepicture:img}},{new:true},function(err,res){
 
   if(err){
      
-return res.json({susccess:false,msg:'Invalid paramaters'});
+return x.json({susccess:false,msg:'Invalid paramaters'});
   }else{
  
      
   }
         
-    })                   
+    })
+}
+          })                   
                         }
     }
 
