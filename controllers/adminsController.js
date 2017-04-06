@@ -1,7 +1,12 @@
 const admin = require('../models/admin');
 
 var adminsController = {
+  
+  logout : function(req,res){
 
+  	req.logout();
+  	res.redirect('/');
+},
   getAdminApplications: function(req,res){
    const query={uid: req.user._id}
    admin.findOne(query,function(err,admin){
@@ -20,14 +25,11 @@ var adminsController = {
  business.findOneAndUpdate({_id:id},{$set:{isApproved:approval}},{new:true},function(err,bus){
    if(err) return res.json({success:false, msg:'Invalid parameters'});
    res.json(bus);
- })
+ });
  }
 
 
  }
-
-
-
 
 
 module.exports = adminsController;

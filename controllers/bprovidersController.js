@@ -4,8 +4,12 @@ const bprovider = require('../models/bprovider');
 
 var bprovidersController = {
 
+  logout : function(req,res){
+  				req.logout();
+  				res.redirect('/'); 
+  },
 
-     AddService:function(req,res,next){
+   AddService:function(req,res,next){
          if( req.file != undefined){
 	     var image = req.file.filename;
          }
@@ -56,18 +60,15 @@ var bprovidersController = {
     if (i!=index)
     newservices.push(services[i]);
     }
-
-
-
     RemoveServiceFromBusiness(bproviderid,newservices,function(err,business){ 
     if(err) res.json('you do not have business');
     if(!business){
-    res.send('error')
+    res.send('error');
     }
-    else res.send('Service Deleted')
+    else res.send('Service Deleted');
 
-    })
-    })
+    });
+    });
     },
 
 

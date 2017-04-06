@@ -16,6 +16,7 @@ router.get('/Top',bprovidersController.viewTop);
 router.get('/All',bprovidersController.viewAll);
 router.post('/searchBusiness',guestsController.searchBusiness);
 
-
+router.get('/logout', passport.authenticate('jwt', {session:false}),
+ bprovidersController.logout);
 
 module.exports = router;
