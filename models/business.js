@@ -5,6 +5,7 @@ var reviewsSchema = mongoose.Schema({description:String,cid:String});
 var businessSchema = mongoose.Schema({
 bproviderid:{
   type:String,
+  unique:true
 },
 businessName:{
   type:String,

@@ -1,11 +1,11 @@
-const clients = require('../models/clients');
 const business = require('../models/business');
+const client = require('../models/client');
 
 
 var clientsController = {
   loadProfile : function(req,res){
 
-  		clients.getProfile(req.user._id,function(err,Profile){
+  		clientsController.getProfile(req.user._id,function(err,Profile){
  if (err) {
   		return	res.json("database error");
     }
@@ -25,6 +25,36 @@ var clientsController = {
         var query = {uid: uid};
     clients.findOne(query, callback);
     }
+
+	
+viewAll: function(req, res){
+
+		 business.find({},function(err,results){
+
+		if(err){
+
+		 		res.send('No Businesses');
+		 	}
+
+		 	res.json(results);
+		 });  			
+},
+
+viewTop: function(req, res){
+	var command = business.find({}).sort({'rating': -1}).limit(Number(10));
+	command.exec(function(err, posts) {
+
+		
+		if(err){
+
+		 		res.send('No Businesses');
+		 	}
+
+		res.json(posts);
+     
+});
+
+}
 
 }
 

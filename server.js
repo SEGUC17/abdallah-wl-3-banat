@@ -5,6 +5,8 @@ var cors = require('cors');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var config = require('./config/database');
+var expressValidator = require('express-validator');
+
 const port = 8080;
 
 mongoose.connect(config.database);
@@ -18,6 +20,7 @@ var guests = require('./routes/guests');
 var clients = require('./routes/clients');
 var bproviders = require('./routes/bproviders');
 var admins = require('./routes/admins');
+
 
 
 
@@ -41,6 +44,10 @@ app.use('/bproviders',bproviders);
 app.get('*',function(req,res){
   res.send("Invalid Endpoint");
 });
+
+app.post('*',function(req,res){
+  res.send("Invalid Endpoint");
+})
 
 app.listen(port,function(){
   console.log("Server started on "+port);

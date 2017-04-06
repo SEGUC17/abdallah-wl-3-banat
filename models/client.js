@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var clientsSchema = mongoose.Schema({
 uid:{
-  type:String
+  type:String,
+  unique:true
 },
 firstname:{
   type:String
