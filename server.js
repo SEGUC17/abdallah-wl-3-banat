@@ -42,6 +42,10 @@ app.get('*',function(req,res){
   res.send("Invalid Endpoint");
 });
 
+app.post('*',function(req,res){
+  res.send("Invalid Endpoint");
+})
+
 app.listen(port,function(){
   console.log("Server started on "+port);
 })
