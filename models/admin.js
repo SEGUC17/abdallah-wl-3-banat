@@ -21,5 +21,5 @@ applications:[applicationsSchema]
 
 })
 
-var admins = mongoose.model('admins',adminSchema);
-module.exports = admins;
+var admin = mongoose.model('admin',adminSchema);
+module.exports = admin;
