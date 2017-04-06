@@ -9,6 +9,7 @@ router.get('/',function(req,res){
 })
 
 router.post('/login',guestsController.login);
+router.post('/register',guestsController.register);
 
 
 module.exports = router;
