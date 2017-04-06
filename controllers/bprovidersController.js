@@ -1,6 +1,7 @@
 const business = require('../models/business');
 const bprovider = require('../models/bprovider');
 
+
 var bprovidersController = {
 
 
@@ -8,7 +9,7 @@ var bprovidersController = {
          if( req.file != undefined){
 	     var image = req.file.filename;
          }
-     req.checkBody('serviceName','serviceName is required').notEmpty();
+   req.checkBody('serviceName','serviceName is required').notEmpty();
 	 req.checkBody('description','description is required').notEmpty();
 	 req.checkBody('price', 'price is required').notEmpty();
      var errors = req.validationErrors();
@@ -85,7 +86,39 @@ var bprovidersController = {
     RemoveServiceFromBusiness : function(id,newservices, callback){
 	var query = {bproviderid: id};
 	business.findOneAndUpdate(query,{services:newservices},{upsert:true},callback);
-    }
+    },
+  
+viewAll: function(req, res){
+
+		 business.find({},function(err,results){
+
+		 	if(err){
+
+		 		res.send('No Businesses');
+		 	}
+
+		 	res.json(results);
+		 });  			
+},
+
+viewTop: function(req, res){
+	var command = business.find({}).sort({'rating': -1}).limit(Number(10));
+	command.exec(function(err, posts) {
+
+		if(err){
+
+		 		res.send('No Businesses');
+		 	}
+
+		res.json(posts);
+     
+});
+
 }
+
+}
+
+};
+
 
 module.exports = bprovidersController;
