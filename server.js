@@ -5,6 +5,9 @@ var cors = require('cors');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var config = require('./config/database');
+var user=require('./models/user');
+var admin=require('./models/admin');
+
 const port = 8080;
 
 mongoose.connect(config.database);
@@ -18,6 +21,7 @@ var guests = require('./routes/guests');
 var clients = require('./routes/clients');
 var bproviders = require('./routes/bproviders');
 var admins = require('./routes/admins');
+
 
 
 
