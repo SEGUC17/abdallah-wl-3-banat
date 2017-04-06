@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var questionSchema = mongoose.Schema({question:String,answer:String});
+var serviceSchema = mongoose.Schema({name:String, description:String, price:Number, picture:String});
+var reviewsSchema = mongoose.Schema({description:String,cid:String});
 var businessSchema = mongoose.Schema({
 bproviderid:{
   type:String,
@@ -16,10 +19,11 @@ phone:{
 },
 ratingsGiven:[{type:Number}],
 rating:{
-  type:Number
+  type:Number,
+  default:0
 },
 announcements:[{type:String}],
-reviews:[{type:String}],
+reviews:[reviewsSchema],
 description:{
   type:String
 },
@@ -29,13 +33,13 @@ profilepicture:{
 info:{
   type:String
 },
-questions:[{question:String, answer:String}],
+questions:[questionSchema],
 isApproved:{
   type:Boolean,
   default:false
 },
-services:[{name:String, description:String, price:Number, picture:String}]
+services:[serviceSchema]
 })
 
-var business = mongoose.model('businesses',businessSchema);
+var business = mongoose.model('business',businessSchema);
 module.exports = business;

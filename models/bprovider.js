@@ -1,18 +1,16 @@
 var mongoose = require('mongoose');
-
 var bproviderSchema = mongoose.Schema({
   uid:{
-    type:String,
-    unique: true
-  },
+  type:String
+},
   email:{
-    type:String,
-    unique: true
+    type:String
   }
+
+
+
 
 })
 
-
-
-var bprovider = mongoose.model('bproviders',bproviderSchema);
+var bprovider = mongoose.model('bprovider',bproviderSchema);
 module.exports = bprovider;

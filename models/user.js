@@ -12,7 +12,10 @@ var userSchema = mongoose.Schema({
   },
   type:Number
 
+
+
+
 })
 
-var user = mongoose.model('users',userSchema);
+var user = mongoose.model('user',userSchema);
 module.exports = user;

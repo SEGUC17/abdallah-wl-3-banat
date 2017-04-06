@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 var adminSchema = mongoose.Schema({
   uid:{
-    type: String,
-    unique: true
-  },
-  email:{
-    type: String,
-    unique: true
-  }
+    type:String
+},
+email:{
+  type:String
+}
 
 })
 
