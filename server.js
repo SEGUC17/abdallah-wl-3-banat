@@ -7,9 +7,13 @@ var mongoose = require('mongoose');
 var config = require('./config/database');
 const port = 8080;
 
+
+
+
+
 mongoose.connect(config.database);
 mongoose.connection.on('connected',function(){
-  console.log('Connected to database');
+ 
 })
 
 var app = express();
@@ -43,5 +47,5 @@ app.get('*',function(req,res){
 });
 
 app.listen(port,function(){
-  console.log("Server started on "+port);
+ 
 })

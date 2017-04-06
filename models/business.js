@@ -1,8 +1,11 @@
 var mongoose = require('mongoose');
+
+
 var questionSchema = mongoose.Schema({question:String,answer:String});
 var serviceSchema = mongoose.Schema({name:String, description:String, price:Number, picture:String});
 var reviewsSchema = mongoose.Schema({description:String,cid:String});
 var businessSchema = mongoose.Schema({
+
 bproviderid:{
   type:String,
 },
