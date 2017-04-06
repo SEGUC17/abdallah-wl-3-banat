@@ -1,13 +1,6 @@
-var business = require('../models/business');
-var bprovider = require('../models/bprovider');
-var clients = require('../models/clients');
-var user = require('../models/user');
+const client = require('../models/client');
 
 var clientsController = {
-  
-  
- /////////////////////// 	vv 	DataBase Functions  vv	\\\\\\\\\\\\\\\\\\\\\\\\
-
 
 }
 
