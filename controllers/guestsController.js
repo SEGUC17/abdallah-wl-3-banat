@@ -1,7 +1,7 @@
 const user = require('../models/user');
 const business = require('../models/business');
-const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const jwt = require('jsonwebtoken');
 
 
 

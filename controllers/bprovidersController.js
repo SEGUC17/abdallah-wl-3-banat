@@ -1,8 +1,9 @@
 const business = require('../models/business');
 const bprovider = require('../models/bprovider');
 
-var bprovidersController = {
 
-}
+ var bproviderController = {
+ /////////////////////// 	vv 	DataBase Functions  vv	\\\\\\\\\\\\\\\\\\\\\\\\
+ }
 
-module.exports = bprovidersController;
+module.exports= bproviderController;
