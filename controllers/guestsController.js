@@ -32,6 +32,36 @@ var guestsController = {
     })
 
 },
+
+
+
+viewAll: function(req, res){
+
+     business.find({},function(err,results){
+
+    if(err){
+
+        res.send('No Businesses');
+      }
+
+      res.json(results);
+     });        
+},
+
+viewTop: function(req, res){
+  var command = business.find({}).sort({'rating': -1}).limit(Number(10));
+  command.exec(function(err, posts) {
+
+    if(err){
+
+        res.send('No Businesses');
+      }
+
+    res.json(posts);
+     
+});
+},
+  
 searchBusiness:function(req,res){
   var businessName = req.body.businessName;
   business.findOne({businessName:businessName},function(err,result){
@@ -134,6 +164,7 @@ register:function(req,res){
   else{
     return res.json({success:false,msg:'Invalid registeration type'});
   }
+
 }
 
 
