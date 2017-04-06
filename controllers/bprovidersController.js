@@ -2,6 +2,8 @@ const admin = require('../models/admin');
 const business = require('../models/business');
 const client = require('../models/client');
 const bprovier = require('../models/bprovider');
+var multer = require('multer');
+var crypto = require('crypto');
 
 
 var bprovidersController = {
@@ -207,7 +209,7 @@ getBusiness : function(id,callback){
       if( req.file != undefined){
     var image = req.file.filename;
       }
-  req.checkBody('serviceName','serviceName is required').notEmpty();
+  req.checkBody('name','serviceName is required').notEmpty();
 req.checkBody('description','description is required').notEmpty();
 req.checkBody('price', 'price is required').notEmpty();
   var errors = req.validationErrors();
@@ -217,12 +219,11 @@ res.json(errors)
   }
   else{
   var service = {
-    serviceName : req.body.serviceName,
+    name : req.body.serviceName,
     description : req.body.description,
     price : req.body.price,
       picture : image
      }
-  var print = res;
   var uid=req.user._id;
   bprovider.findOne({uid:uid},function(err,result){
 
@@ -232,7 +233,7 @@ res.json(errors)
 if(err) res.send('You do not have business');
   else{Business.save(function(err){});
       }
-  print.json(Business);
+  res.json(Business);
 
    });
   });
