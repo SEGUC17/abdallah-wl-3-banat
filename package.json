@@ -14,8 +14,7 @@
     "jsonwebtoken":"*",
     "body-parser":"*",
     "passport":"*",
-    "passport-jwt":"*",
-    "multer":"*"
+    "passport-jwt":"*"
   },
   "author": "",
   "license": "ISC"

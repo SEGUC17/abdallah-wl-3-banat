@@ -13,6 +13,8 @@ router.get('/Top',guestsController.viewTop);
 router.get('/All',guestsController.viewAll);
 
 router.post('/login',guestsController.login);
+router.post('/register/:type',guestsController.register);
+router.post('/searchBusiness',guestsController.searchBusiness);
 
 
 module.exports = router;

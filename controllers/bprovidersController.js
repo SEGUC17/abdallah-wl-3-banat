@@ -1,6 +1,7 @@
 const business = require('../models/business');
 const bprovider = require('../models/bprovider');
 
+
 var bprovidersController = {
 
 
@@ -33,5 +34,8 @@ viewTop: function(req, res){
 }
 
 }
+
+};
+
 
 module.exports = bprovidersController;
