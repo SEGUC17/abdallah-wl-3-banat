@@ -1,6 +1,6 @@
 var express = require('express');
-var bodyParser = require('body-parser');
 var path = require('path');
+var bodyParser = require('body-parser');
 var cors = require('cors');
 var passport = require('passport');
 var mongoose = require('mongoose');
@@ -19,14 +19,18 @@ var clients = require('./routes/clients');
 var bproviders = require('./routes/bproviders');
 var admins = require('./routes/admins');
 
+
+
 app.use(cors());
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.json());
 
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+require('./config/passport')(passport);
 
 
 app.use('/clients',clients);
@@ -38,6 +42,6 @@ app.get('*',function(req,res){
   res.send("Invalid Endpoint");
 });
 
-app.listen(8081,function(){
+app.listen(port,function(){
   console.log("Server started on "+port);
-});
+})
