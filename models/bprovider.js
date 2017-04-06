@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var bproviderSchema = mongoose.Schema({
   uid:{
-  type:String
+  type:String,
+  unique:true
 },
   email:{
     type:String
