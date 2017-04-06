@@ -5,8 +5,7 @@ var cors = require('cors');
 var passport = require('passport');
 var mongoose = require('mongoose');
 var config = require('./config/database');
-var user=require('./models/user');
-var admin=require('./models/admin');
+var expressValidator = require('express-validator');
 
 const port = 8080;
 
