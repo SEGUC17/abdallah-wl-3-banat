@@ -38,9 +38,11 @@ app.use('/',guests);
 app.use('/admins',admins);
 app.use('/bproviders',bproviders);
 
+
 app.get('*',function(req,res){
   res.send("Invalid Endpoint");
 });
+
 
 app.listen(port,function(){
   console.log("Server started on "+port);

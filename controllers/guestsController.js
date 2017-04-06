@@ -28,7 +28,26 @@ var guestsController = {
       })
     })
 
-}
+  },
+  loadBusiness : function(req,res){
+  		guestsController.getBusiness(req.params.id,function(err,BusProfile){
+            if(err) 
+                res.json("There's an internal mongoose error :" + err);
+            else 
+                if(!BusProfile)
+                    res.json("This profile couldnt be found or may have been deleted " + BusProfile);
+                else	
+                    res.json({Profile :  BusProfile});	
+  		});    	
+   },
+
+/////////////////////// 	 	DataBase Functions		\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+	getBusiness : function(id,callback){
+    	var query = {bproviderid: id};
+    	business.findOne(query, callback);
+	}
 }
 
 

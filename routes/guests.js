@@ -10,5 +10,7 @@ router.get('/',function(req,res){
 
 router.post('/login',guestsController.login);
 
+router.get('/ViewBusinesses/:id', guestsController.loadBusiness);
+
 
 module.exports = router;
