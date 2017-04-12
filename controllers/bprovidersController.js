@@ -1,7 +1,8 @@
 const admin = require('../models/admin');
 const business = require('../models/business');
 const client = require('../models/client');
-const bprovier = require('../models/bprovider');
+const bprovider = require('../models/bprovider');
+const user = require('../models/user');
 var multer = require('multer');
 var crypto = require('crypto');
 
@@ -104,10 +105,10 @@ getBusiness : function(id,callback){
                  if(req.body.location){
                        var x = res;
 
-                   var n = req.body.location;
+                   var n1 = req.body.location;
                  bprovider.findOne({uid:req.user._id},function(req,res){
                    if(res){
-                 business.findOneAndUpdate({bproviderid:res._id},{$set:{location:n}},{new:true},function(err,res){
+                 business.findOneAndUpdate({bproviderid:res._id},{$set:{location:n1}},{new:true},function(err,res){
     if(err){
   return x.json({susccess:false,msg:'Invalid paramaters'});
     }else{
@@ -121,10 +122,10 @@ getBusiness : function(id,callback){
                      if(req.body.phone) {
                         var x = res;
 
-                       var n = req.body.phone;
+                       var n2 = req.body.phone;
                        bprovider.findOne({uid:req.user._id},function(req,res){
                          if(res){
-                         business.findOneAndUpdate({bproviderid:res._id},{$set:{phone:n}},{new:true},function(err,res){
+                         business.findOneAndUpdate({bproviderid:res._id},{$set:{phone:n2}},{new:true},function(err,res){
     if(err){
       return  x.json({susccess:false,msg:'Invalid paramaters'});
     }else{
@@ -137,10 +138,10 @@ getBusiness : function(id,callback){
                      }
                        if(req.body.info){
          var x = res;
-                   var n = req.body.info;
+                   var n3 = req.body.info;
                    bprovider.findOne({uid:req.user._id},function(req,res){
                     if(res){
-   business.findOneAndUpdate({bproviderid:res._id},{$set:{info:n}},{new:true},function(err,res){
+   business.findOneAndUpdate({bproviderid:res._id},{$set:{info:n3}},{new:true},function(err,res){
     if(err){
   return x.json({susccess:false,msg:'Invalid paramaters'});
     }else{
