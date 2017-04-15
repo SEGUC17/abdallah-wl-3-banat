@@ -247,6 +247,35 @@ if(err) res.send('You do not have business');
   }
 },
 
+  deleteAnnouncement: function(req, res){ 
+    var uid = req.user._id;
+    var index = req.param('index');
+    bprovider.findOne({uid: uid}, (err, bpro) => {
+      if(err) return res.json({msg: "Invalid parameter"});
+      var bproviderid = bpro._id;
+
+      business.findOne({bproviderid: bproviderid}, (err, result) => {
+        if(err) return res.json('Invalid Parameter');
+        if(!result) return res.json('No business found');
+
+        var newAnns = [];
+        var announcements = result.announcements;
+        var annLength = announcements.length;
+
+        for (var i = 0; i < annLength; i++){
+        if (i != index)
+          newAnns.push(announcements[i]);
+        }
+
+        business.findOneAndUpdate({bproviderid: bproviderid}, {announcements: newAnns}, {upsert: true}, (err, result) => {
+          if(err) return res.json('Invalid Parameter');
+          if(!result) return res.json('No business found');
+          return res.json('Announcement deleted');
+        });
+      });
+    });
+  },
+
     // DELETING SERVICE
 
     DeleteService : function(req,res,next){
@@ -282,6 +311,34 @@ if(err) res.send('You do not have business');
         });
     },
 
+    postAnnouncement: function(req,res){
+
+
+        bprovidersController.getBusProvider(req.user._id,function(err,Provider){
+              if(err)
+                  res.json("There's an internal mongoose error " + err);
+              else
+                if(!Provider)
+                  res.json("This provider couldnt be found or may have been deleted ");
+              else  
+              {
+                var description = req.body.description;
+                business.update({bproviderid: Provider._id },{$push:{announcements: description}},function(err1,Business){
+
+                  if(err1)
+                          res.send("There's an internal mongoose error " + err1);
+                      else
+                          if(!Business)
+                              res.send("This business couldnt be found or may have been deleted ");
+                          else
+                      res.json({Success : true});
+             });
+              }
+        });
+
+         
+
+    },
 
     FindBusinessById : function(id,callback){
     var query = {bproviderid : id };
@@ -391,8 +448,6 @@ findBusinessById: function(id,callback){
     var query = {bproviderid: id};
     business.findOne(query,callback);
 }
+
 }
-
-
-
 module.exports = bprovidersController;

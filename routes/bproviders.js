@@ -13,6 +13,9 @@ router.get('/MyProfile',passport.authenticate('jwt',{session:false}),bprovidersC
 
 router.get('/myQuestions', passport.authenticate('jwt', {session: false}), bprovidersController.viewQuestions);
 
+router.post('/PostAnnouncement', passport.authenticate('jwt', {session: false}), bprovidersController.postAnnouncement);
+router.post('/DeleteAnnouncement/:index',passport.authenticate('jwt', {session: false}),bprovidersController.deleteAnnouncement);
+
 router.get('/ViewReviews/:id',bprovidersController.viewReviews);
 router.post('/AddService',upload.single('file'),passport.authenticate('jwt',{session:false}),bprovidersController.AddService);
 router.get('/DeleteService',passport.authenticate('jwt',{session:false}),bprovidersController.DeleteService);

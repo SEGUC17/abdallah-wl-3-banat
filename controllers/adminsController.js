@@ -20,6 +20,19 @@ business.findOneAndUpdate({ bproviderid : id }, { isApproved : false } , {upsert
 });
 
 },
+viewClients: function(req,res){
+    client.find({},(err,result)=>{
+      if(err){
+        return res.json({msg:'invalid parameters'});
+      }
+      if(result.length == 0){
+        return res.json({msg:'No Clients Available!'});
+      }
+      else{
+        return res.json(result);
+      }
+    });
+ },
   banClient:function(req,res){
 	 		var id = req.param('clientid');
 	 		client.findOneAndUpdate({_id:id},{$set:{isBanned:true}},{new:true},function(err,Client){
