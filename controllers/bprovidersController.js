@@ -237,7 +237,7 @@ if(err) res.send('You do not have business');
     if(!result1)
     res.json({success:false,msg:'Service was not added'});
     else {
-      res.json({success:true,msg:'Service was added'});
+      res.json({success:true,msg:'Service has been added'});
     }
   });
       }
