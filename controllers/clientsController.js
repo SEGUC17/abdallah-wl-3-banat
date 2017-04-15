@@ -194,6 +194,17 @@ postReview : function (req,res) {
                 res.json({Reviews: Business.reviews});
     });
 },
+ViewAnnoucements:function(req, res){
+    bprovidersController.findBusinessById(req.params.id,function(err,Business){
+  if(err)
+            res.send("Database error " + err);
+        else
+            if(!Business)
+                res.send("Business Not Found");
+            else
+                res.json({announcements: Business.announcements});
+    });
+},
 
 /////////////////////// 	vv 	DataBase Functions  vv	\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -201,6 +212,7 @@ findBusinessById: function(id,callback){
      var query = {bproviderid: id};
      business.findOne(query,callback);
 },
+
 
 findAndUpdateBusinessReview: function(id,review,callback){
     business.findOneAndUpdate({bproviderid: id},{$push:{reviews:review}},{new:true},callback);

@@ -184,8 +184,8 @@ register:function(req,res){
   else{
     return res.json({success:false,msg:'Invalid registeration type'});
   }
-
 },
+
 viewReviews: function(req, res){
     guestsController.findBusinessById(req.params.id,function(err,Business){
         if(err)

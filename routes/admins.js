@@ -12,5 +12,5 @@ router.get('/logout', passport.authenticate('jwt', {session:false}),
 router.get('/getapps',passport.authenticate('jwt',{session:false}),adminsController.getAdminApplications);
 router.post('/approve/:id/:approval',passport.authenticate('jwt',{session:false}),adminsController.acceptOrDecline);
 router.get('/removebprovider',passport.authenticate('jwt',{session:false}),adminsController.removeProvider);
-
+router.get('/viewclients',passport.authenticate('jwt',{session:false}),adminsController.viewClients);
 module.exports = router;
