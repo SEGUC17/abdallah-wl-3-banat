@@ -207,7 +207,7 @@ getBusiness : function(id,callback){
   				res.redirect('/');
   },
 
-AddService:function(req,res,next){  
+AddService:function(req,res,next){
       if(req.file){
     var image = req.file.filename;
       }
@@ -226,7 +226,6 @@ res.json(errors)
     price : req.body.price,
      picture : image
      }
-     console.log(service);
   var uid=req.user._id;
   bprovider.findOne({uid:uid},function(err,result){
 
@@ -234,7 +233,13 @@ res.json(errors)
 
   bprovidersController.AddServiceToBusiness(bproviderid,service,function(err,Business){
 if(err) res.send('You do not have business');
-  else{Business.save(function(err){});
+  else{Business.save(function(err,result1){
+    if(!result1)
+    res.json({success:false,msg:'Service was not added'});
+    else {
+      res.json({success:true,msg:'Service was added'});
+    }
+  });
       }
 
    });
