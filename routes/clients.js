@@ -17,6 +17,7 @@ clientsController.logout);
 router.post('/rate',passport.authenticate('jwt',{session:false}),clientsController.rate);
 
 router.get('/ViewReviews/:id',clientsController.viewReviews);
+router.get('/ViewAnnoucements/:id',clientsController.ViewAnnoucements);
 router.post('/PostReview/:id',passport.authenticate('jwt',{session:false}),clientsController.postReview);
 
 router.get('/Top',clientsController.viewTop);

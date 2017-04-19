@@ -204,8 +204,20 @@ findBusinessById: function(id,callback){
 
 findAndUpdateBusinessReview: function(id,review,callback){
     business.findOneAndUpdate({bproviderid: id},{$push:{reviews:review}},{new:true},callback);
-}
+},
+
+ViewAnnoucements: function(req, res){
+   clientsController.findBusinessById(req.params.id,function(err,Business){
+        if(err)
+            res.send("Database error");
+        else
+            if(!Business)
+                res.send("Business Not Found");
+            else
+                res.json({announcements: Business.announcements});
+   });
 
 }
 
+}
 module.exports = clientsController;
