@@ -12,7 +12,7 @@ export class GetBusinessService {
   }
 
   guestGetBusiness(id){
-      return this.http.get('http://localhost:8080/guest/ViewBusinesses/'+id).map(res=>res.json());
+      return this.http.get('http://localhost:8080/ViewBusinesses/'+id).map(res=>res.json());
   }
   
 

@@ -17,7 +17,7 @@ var guestsController = {
                 if(!BusProfile)
                     res.json("This profile couldnt be found or may have been deleted " + BusProfile);
                 else
-                    res.json({Profile :  BusProfile});
+                    res.json(BusProfile);
   		});
    },
 

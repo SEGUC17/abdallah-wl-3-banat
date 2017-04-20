@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div class="row">
+      <br><br><br><br>
+      <div class="span4 profile">
+          <img src={{business.profilepicture}}> 
+      </div>
+
+      <div class="span6 profile">
+          <h2 class="title">{{business.businessName}}</h2>   
+
+          <h5 class="title">{{business.description}}</h5>
+          <h6 class="title">{{business.info}}</h6>
+      </div>
+
+    </div>
+    <br>
+    <div class="row">
+      
+        <div class="tabbable">
+  
+      <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a href="#services" data-toggle="tab">Services</a></li>
+          <li><a  href="#reviews" data-toggle="tab">Reviews</a></li>
+          <li><a  href="#questions" data-toggle="tab">Questions</a></li>
+          <li><a  href="#announcements" data-toggle="tab">Offers</a></li>
+      </ul>
+    
+      <div class="tab-content" style="width:1300px;">
+          <div class="tab-pane fade in active" id="services">
+            <ul>
+              <div *ngFor="let service of services">
+              <li style = "float: left; margin-left: 10px;" >
+              <div class="container">
+                 <img style = "height:150px;" src={{service.picture}}>
+                 <h3 class="title">{{service.name}}</h3>       
+                 <h5>Description : {{service.description}}</h5>
+                 <button class ="button"  (click) = "onButtonClicked($event)">Reserve for {{service.price}} EGP </button>
+              </div>
+              
+              </li>
+
+              </div>
+            </ul>
+          </div>                       
+
+      
+          <div class="tab-pane fade in" id="reviews">
+            <ul>
+          <div *ngFor="let review of reviews">
+          <li style = "float: left; margin-left: 10px;" >
+          <br>
+             
+          </li>
+          </div>  
+          </ul>     
+          </div>
+
+      </div>
+
+  </div>
+
+
+    </div>
+</div>

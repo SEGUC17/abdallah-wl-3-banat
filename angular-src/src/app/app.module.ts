@@ -3,34 +3,29 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-
 import { AppComponent } from './app.component';
-import { ClientsComponent } from './components/clients/clients.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import {RouterModule, Routes} from '@angular/router';
-import { GuestsComponent } from './components/guests/guests.component';
-import { EditserviceComponent } from './components/editservice/editservice.component';
-import { BproviderComponent } from './components/bprovider/bprovider.component';
-import { ServiceeditService } from './services/serviceedit.service';
-import {ViewservicesService } from './services/viewservices.service';
-import { GetBusinessService } from './services/get-business.service'; 
-
+import { RouterModule, Routes} from '@angular/router';
+import { GetBusinessService } from './services/get-business.service';
+import { GuestViewBusinessComponent } from './components/guest-view-business/guest-view-business.component';
+import { ClientViewBusinessComponent } from './components/client-view-business/client-view-business.component'; 
+import { ViewAllComponent } from './components/view-all/view-all.component'; 
+import { ViewService } from './services/view.service';
 
 
 const appRoutes: Routes =  [
-  {path:'', component: GuestsComponent},
-  {path:'EditService', component: EditserviceComponent},
-  {path:'Bprovider', component: BproviderComponent}
+  {path:'', component: ViewAllComponent},
+  {path:'Client/ViewBusiness', component: ClientViewBusinessComponent},
+  {path:'ViewBusiness', component: GuestViewBusinessComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClientsComponent,
     NavbarComponent,
-    GuestsComponent,
-    EditserviceComponent,
-    BproviderComponent
+    GuestViewBusinessComponent,
+    ClientViewBusinessComponent,
+    ViewAllComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +33,7 @@ const appRoutes: Routes =  [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ServiceeditService,ViewservicesService,GetBusinessService],
+  providers: [GetBusinessService,ViewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
