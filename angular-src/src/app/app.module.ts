@@ -16,8 +16,10 @@ import { RegisterComponent } from './components/register/register.component';
 
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
-
+import{ClientsChangePasswordService }from './services/clients-change-password.service';
 import {ClientsService} from './services/clients.service';
+import { BpSearchComponent } from './components/bp-search/bp-search.component';
+import { ClientsChangePasswordComponent } from './components/clients-change-password/clients-change-password.component';
 
 const appRoutes: Routes =  [
   {path:'', component: GuestsComponent},
@@ -25,7 +27,8 @@ const appRoutes: Routes =  [
   {path:'bproviders',component:GuestsComponent},
   {path:'register',component:RegisterComponent},
   {path:'', component: ClientsComponent},
-{path:'editCP',component:ClientsComponent}
+{path:'editClientProfile',component:ClientsComponent},
+{path:'editClientPassword',component:ClientsChangePasswordComponent}
 
 ]
 
@@ -36,7 +39,9 @@ const appRoutes: Routes =  [
     NavbarComponent,
     GuestsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BpSearchComponent,
+    ClientsChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [ValidateService,AuthService,ClientsService],
+  providers: [ValidateService,AuthService,ClientsService,ClientsChangePasswordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

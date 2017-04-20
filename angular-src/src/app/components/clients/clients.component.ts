@@ -17,9 +17,9 @@ Firstname: String;
 Lastname: String;
 creditCArdInfo:String;
 address: string;
-  username: String;
+ 
   email: String;
-  password: String;
+
  // newPassword: String;
   //passwordValidation:String
 
@@ -35,7 +35,7 @@ address: string;
 
   onClientseditProfileSubmit(){
    this.clientsservice.editP(this.Firstname,this.Lastname,this.creditCArdInfo,
-   this.address,this.username,this.email,this.password).subscribe(data => {
+   this.address,this.email).subscribe(data => {
      console.log(data);
    })
   }
