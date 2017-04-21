@@ -10,6 +10,8 @@
             	<li *ngIf="authService.loggedIn()" [routerLinkActive]="['current']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">Home</a></li>
                 <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['current']"  [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/login']">Login</a></li>
                 <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['current']"  [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/register']">Sign up</a></li>
+                <li  [routerLinkActive]="['current']"  [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/reviews']">view Reviews</a></li>
+
                 <li *ngIf="authService.loggedIn()" ><a (click)="onLogoutClick()"  href ="#">Logout</a></li>
                 <li *ngIf="authService.loggedIn()"><a href="#about">Search</a></li>
             </ul>

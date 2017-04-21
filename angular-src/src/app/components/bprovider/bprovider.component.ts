@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
-import {ViewReviewsService} from '../../services/get-reviews.service' ;
+import {GetReviewsService} from '../../services/get-reviews.service' ;
 
 
 @Component({
@@ -10,11 +10,10 @@ import {ViewReviewsService} from '../../services/get-reviews.service' ;
   styleUrls: ['./bprovider.component.css']
 })
 export class BproviderComponent implements OnInit {
-
 constructor(private flashMessage:FlashMessagesService,
 private router:Router,
-private viewreviews:ViewReviewsService,
-private authService:AuthService) { }
+private viewreviews:GetReviewsService) { }
+
 
 ngOnInit() {
 }

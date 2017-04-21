@@ -23,6 +23,7 @@ authToken:any;
     this.user = user;
   }
 
+
   logout(){
     this.authToken = null;
     this.user = null;

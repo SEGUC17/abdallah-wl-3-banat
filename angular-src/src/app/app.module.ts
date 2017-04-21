@@ -13,6 +13,10 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
 import {AuthService} from './services/auth.service';
 import { RegisterComponent } from './components/register/register.component';
 import { BproviderComponent } from './components/bprovider/bprovider.component';
+import {GetReviewsService} from './services/get-reviews.service';
+import {PostReviewsService} from './services/post-reviews.service';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+
 
 const appRoutes: Routes =  [
   {path:'', component: GuestsComponent},
@@ -30,7 +34,9 @@ const appRoutes: Routes =  [
     GuestsComponent,
     LoginComponent,
     RegisterComponent,
-    BproviderComponent
+    BproviderComponent,
+    ReviewsComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,7 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [AuthService],
+  providers: [AuthService,GetReviewsService,PostReviewsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

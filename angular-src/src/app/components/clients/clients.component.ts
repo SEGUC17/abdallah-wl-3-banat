@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {GetReviewsService} from '../../services/get-reviews.service' ;
+import {Router} from '@angular/router';
+import {FlashMessagesService} from 'angular2-flash-messages';
+
 
 @Component({
   selector: 'app-clients',
@@ -7,9 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClientsComponent implements OnInit {
 
-  constructor() { }
+constructor(private flashMessage:FlashMessagesService,
+private router:Router,
+private viewreviews:GetReviewsService) { }
 
-  ngOnInit() {
+ngOnInit() {
+}
+
+
+
+  OnViewReviews(event){
+   var id = event.attributes.value; // hnshof ezay ngeb el id
+   this.viewreviews.GetReviews(id);
   }
-
 }
