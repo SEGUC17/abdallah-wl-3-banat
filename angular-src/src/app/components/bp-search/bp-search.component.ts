@@ -4,6 +4,8 @@ import{FlashMessagesService} from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
 import {ClientsService} from '../../services/clients.service';
 import{Router} from '@angular/router'
+import{BpServicesService} from '../../services/bp-services.service';
+import { FilterPipe } from '../../filter.pipe'
 
 @Component({
   selector: 'app-bp-search',
@@ -12,9 +14,27 @@ import{Router} from '@angular/router'
 })
 export class BpSearchComponent implements OnInit {
 
-  constructor() { }
+  businesses:any;
+
+  constructor(private validateService: ValidateService ,
+  private flashMessage:FlashMessagesService,
+  private AuthService: AuthService,
+  private router:Router,
+  private BpServicesService:BpServicesService
+  ) { }
 
   ngOnInit() {
+    this.BpServicesService.getAllBusiness().subscribe(businesses =>{
+  this.businesses = businesses;
+  console.log(businesses);
+    })
+  }
+  
+
+  onBpSearch(){
+   this.BpServicesService.searchBusiness(this.businesses).subscribe(data => {
+   console.log(data);
+   })
   }
 
 }

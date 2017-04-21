@@ -2,6 +2,7 @@ const admin = require('../models/admin');
 const business = require('../models/business');
 const client = require('../models/client');
 const bprovier = require('../models/bprovider');
+const user= require('../models/user');
 
 
 var clientsController = {

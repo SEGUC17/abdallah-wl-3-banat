@@ -13,13 +13,14 @@ import {FlashMessagesModule} from 'angular2-flash-messages';
 
 import { RegisterComponent } from './components/register/register.component';
 
-
+import{ BpServicesService} from './services/bp-services.service';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import{ClientsChangePasswordService }from './services/clients-change-password.service';
 import {ClientsService} from './services/clients.service';
 import { BpSearchComponent } from './components/bp-search/bp-search.component';
 import { ClientsChangePasswordComponent } from './components/clients-change-password/clients-change-password.component';
+import { FilterPipe } from './filter.pipe';
 
 const appRoutes: Routes =  [
   {path:'', component: GuestsComponent},
@@ -28,8 +29,8 @@ const appRoutes: Routes =  [
   {path:'register',component:RegisterComponent},
   {path:'', component: ClientsComponent},
 {path:'editClientProfile',component:ClientsComponent},
-{path:'editClientPassword',component:ClientsChangePasswordComponent}
-
+{path:'editClientPassword',component:ClientsChangePasswordComponent},
+{path:'bpSearch', component:BpSearchComponent}
 ]
 
 @NgModule({
@@ -41,7 +42,8 @@ const appRoutes: Routes =  [
     LoginComponent,
     RegisterComponent,
     BpSearchComponent,
-    ClientsChangePasswordComponent
+    ClientsChangePasswordComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,8 @@ const appRoutes: Routes =  [
     RouterModule.forRoot(appRoutes),
     FlashMessagesModule
   ],
-  providers: [ValidateService,AuthService,ClientsService,ClientsChangePasswordService],
+  providers: [ValidateService,AuthService,ClientsService,
+  ClientsChangePasswordService,BpServicesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

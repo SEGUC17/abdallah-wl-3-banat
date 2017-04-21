@@ -12,7 +12,7 @@ import{ClientsChangePasswordService }from '../../services/clients-change-passwor
 })
 
 export class ClientsChangePasswordComponent implements OnInit {
-
+username:string;
 currentPassword:string;
 newPassword:string;
 newPasswordValidation:string
@@ -28,7 +28,7 @@ newPasswordValidation:string
   }
 
   onClientsChangePasswordSubmit(){
-   this.ClientsChangePasswordService.editPassword(this.currentPassword,this.newPassword,this.newPasswordValidation).subscribe(data => {
+   this.ClientsChangePasswordService.editPassword(this.username,this.currentPassword,this.newPassword,this.newPasswordValidation).subscribe(data => {
      console.log(data);
    })
   }

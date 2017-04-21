@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.flashMessage.show(data.msg,{cssClass:'alert-success',timeout:3000});
       this.authService.storeUserData(data.token,data.user);
       if(data.user.type == 0)
-      this.router.navigate(['clients']);
+      this.router.navigate(['editClientPassword']);
       else if(data.user.type == 1)
       this.router.navigate(['bproviders']);
       else this.router.navigate(['admins']);

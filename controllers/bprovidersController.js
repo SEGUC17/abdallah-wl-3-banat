@@ -4,6 +4,7 @@ const client = require('../models/client');
 const bprovier = require('../models/bprovider');
 var multer = require('multer');
 var crypto = require('crypto');
+var user = require('../models/user');
 
 
 var bprovidersController = {
