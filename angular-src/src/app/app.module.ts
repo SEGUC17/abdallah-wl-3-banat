@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {PaginatePipe, PaginationService} from 'ng2-pagination';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -33,7 +34,7 @@ const appRoutes: Routes =  [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GetBusinessService,ViewService],
+  providers: [GetBusinessService,ViewService,PaginationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

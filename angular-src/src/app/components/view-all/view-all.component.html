@@ -42,17 +42,17 @@
                         <div class="tab-pane fade in active" id="viewall">
                         <ul>
                         <div *ngFor="let business of businesses">
-                        <li style = "float: left; margin-left: 10px;" >
-                        <br>
-                           <figure> <img style = "height:300px; !important" src="http://images5.fanpop.com/image/photos/30900000/beautiful-pic-different-beautiful-pictures-30958249-500-375.jpg">
-                           <br>
-                             Name: {{business.businessName}} <br> 
-                             Rating: {{business.rating}} <br> 
-                             Description: {{business.info}} <br>
-                             location: {{business.location}}
-                           <figcaption><button class ="button" value={{business.bproviderid}} (click) = "onButtonClicked($event)">Learn More</button></figcaption>
-                           </figure>
-                           </li>
+                                <li style = "float: left; margin-left: 10px;" >
+                                <br>
+                                    <figure> <img style = "height:300px; !important" src="http://images5.fanpop.com/image/photos/30900000/beautiful-pic-different-beautiful-pictures-30958249-500-375.jpg">
+                                        <br>
+                                            Name: {{business.businessName}} <br> 
+                                            Rating: {{business.rating}} <br> 
+                                            Description: {{business.info}} <br>
+                                            location: {{business.location}}
+                                        <figcaption><button class ="button" value={{business.bproviderid}} (click) = "onButtonClicked($event)">Learn More</button></figcaption>
+                                    </figure>
+                                </li>
 
                         </div>
                         </ul>

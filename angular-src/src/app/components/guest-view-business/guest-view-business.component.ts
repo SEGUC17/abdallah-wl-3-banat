@@ -2,6 +2,7 @@ import { Component, OnInit , Input } from '@angular/core';
 import { GetBusinessService } from '../../services/get-business.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import {PaginatePipe, PaginationService} from 'ng2-pagination';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class GuestViewBusinessComponent implements OnInit {
 
   constructor(private getBusinessService: GetBusinessService,
               private router: Router,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private pagination: PaginationService
               ){ }
 
   ngOnInit() {
