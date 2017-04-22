@@ -182,7 +182,7 @@ viewReviews:  function(req, res){
 
 postReview : function (req,res) {
     var review =  {  description : req.body.description,
-                     uid : "69123"
+                     name: req.body.name
                   };
     clientsController.findAndUpdateBusinessReview(req.params.id,review,function(err,Business){
         if(err)
@@ -213,8 +213,10 @@ ViewAnnoucements: function(req, res){
         else
             if(!Business)
                 res.send("Business Not Found");
-            else
+            else{
+                console.log(Business.announcements+ "   " + Business);
                 res.json({announcements: Business.announcements});
+            }
    });
 
 }

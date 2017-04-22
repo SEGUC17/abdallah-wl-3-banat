@@ -1,3 +1,49 @@
-<p>
-  reviews works!!!!
-</p>
+ <div class="container" *ngFor="let review of reviews">
+                 <!--   <li style = "float: left; margin-left: 10px;" >  -->
+                        <div class="row">
+                            <!-- Start Blockquote -->
+                            <div class="span9">
+                                <h4 class="spec">Review</h4>
+                                
+                                <blockquote>
+                                    <p>{{review.description}}</p>
+                                    <small>
+                                        <cite title="John Bostic">{{review.name}}</cite>
+                                    </small>
+                                </blockquote>
+</div>
+       </div>
+               </div>
+
+
+
+
+<div class="container">
+
+<form id="contact-form" class="contact-form" (submit)="postReview()" >
+	<p class="contact-message">
+		<textarea id="contact_message" [(ngModel)]="newReview" placeholder="Your Review.." name="newReview" rows="15" cols="40"></textarea>
+	</p>
+	<p class="contact-submit">
+		<a id="contact-submit" class="submit" type="submit" value = "submit" href="#">Post</a>
+	</p>
+
+	<div id="response">
+
+	</div>
+</form>
+
+</div>
+
+
+ <div class="container" *ngFor="let annoucement of annoucements">
+                 <!--   <li style = "float: left; margin-left: 10px;" >  -->
+                        <div class="row">
+                            <!-- Start Blockquote -->
+                            <div class="span9">
+                                <h4 class="spec">{{annoucement}}</h4>
+                                
+                              
+</div>
+       </div>
+               </div>

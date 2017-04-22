@@ -22,7 +22,8 @@ const appRoutes: Routes =  [
   {path:'', component: GuestsComponent},
   {path:'login',component:LoginComponent},
   {path:'bproviders',component:GuestsComponent},
-  {path:'register',component:RegisterComponent}
+  {path:'register',component:RegisterComponent},
+  {path:'reviews',component:ReviewsComponent}
 
 ]
 
