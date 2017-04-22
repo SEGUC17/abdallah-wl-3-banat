@@ -1,0 +1,99 @@
+<div id="work" class="page">
+
+<div id="work" class="page">
+	<div class="container">
+    	<!-- Title Page -->
+        <div class="row">
+            <div class="span12">
+                <div class="title-page">
+                    <h2 class="title">Esm el platform.com</h2>
+                    <h3 class="title-description"> Suggested outings. </h3>
+                </div>
+            </div>
+        </div>
+        <!-- End Title Page -->
+
+        <!-- Portfolio Projects -->
+       
+        <!-- End Portfolio Projects -->
+    </div>
+</div>
+
+<!-- End About Section -->
+
+
+<!-- Contact Section -->
+<div id="edit" class="page">
+<div class="container">
+    <!-- Title Page -->
+    <div class="row">
+        <div class="span12">
+            <div class="title-page">
+                <h2 class="title">Edit profile</h2>
+                <h3 class="title-description">We’re currently accepting new client projects. We look forward to serving you.</h3>
+            </div>
+        </div>
+    </div>
+    <!-- End Title Page -->
+
+    <!-- Contact Form -->
+    <div class="row">
+    	<div class="span3">
+        	<div class="contact-details">
+        		<h3>Your Profile</h3>
+                <ul>
+                    <li><a href="#">hello </a></li>
+                    <li></li>
+                    <li>
+                        
+                        <br>
+                        5240 Vanish Island. 105
+                        <br>
+                        Unknow
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+      <div class="span9">
+<!--edit P form -->
+        	<form (submit)="onClientseditProfileSubmit()" id="contact-form" class="contact-form" >
+            	<p class="contact-Uname">
+            		<input id="contact_Uname" type="text" [(ngModel)]="Firstname" placeholder="First Name" value="" name="Firstname" />
+                </p>
+                <p class="contact-pass">
+                	<input id="contact_pass" type="text" [(ngModel)]="Lastname" placeholder="Last Name" value="" name="Lastname" />
+                </p>
+
+                <p class="contact-email">
+                	<input id="contact_email" type="email" [(ngModel)]="email" placeholder="Email" value="" name="email" />
+                </p>
+                <p class="contact-bName">
+            		<input id="contact_bName" type="text" [(ngModel)]="creditCArdInfo" placeholder="Credit Card Info" value="" name="creditCArdInfo" />
+                </p>
+                <p class="contact-location">
+            		<input id="contact_location" type="text" [(ngModel)]="address" placeholder="address" value="" name="address" />
+                </p>
+                <p class="contact-phone">
+            		<input id="contact_phone" type="text" [(ngModel)]="phone" placeholder="Phone Number" value="" name="phone" />
+                </p>
+                
+                
+                <p class="contact-submit">
+                	<!--a id="contact-submit" class="submit" href="#">Save Your Changes</a-->
+                  <input type ="submit" class = "submit" value = "Save Your Changes">
+                </p>
+
+                <div id="response">
+
+                </div>
+            </form>
+<!--/end form -->
+        </div>
+
+        
+    </div>
+    <!-- End Contact Form -->
+</div>
+</div>
+<!-- End Contact Section -->

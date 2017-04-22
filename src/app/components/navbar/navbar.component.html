@@ -1,0 +1,18 @@
+<header>
+    <div class="sticky-nav">
+    	<a id="mobile-nav" class="menu-nav" href="#menu-nav"></a>
+
+        <div id="logo">
+        	<a id="goUp" href="#home-slider" title="Brushed | Responsive One Page Template">Brushed Template</a>
+        </div>
+        <nav id="menu">
+        	<ul id="menu-nav">
+            	<li *ngIf="authService.loggedIn()" [routerLinkActive]="['current']" [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/']">Home</a></li>
+                <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['current']"  [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/login']">Login</a></li>
+                <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['current']"  [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/register']">Sign up</a></li>
+                <li *ngIf="authService.loggedIn()" ><a (click)="onLogoutClick()"  href ="#">Logout</a></li>
+                <li *ngIf="authService.loggedIn()"[routerLinkActive]="['current']"  [routerLinkActiveOptions]="{exact:true}"><a [routerLink]="['/viewbusiness']">Search</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
