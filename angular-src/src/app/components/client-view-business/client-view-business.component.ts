@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GetBusinessService } from '../../services/get-business.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import {PaginatePipe, PaginationService} from 'ng2-pagination';
 
 @Component({
   selector: 'app-client-view-business',
@@ -9,7 +11,13 @@ import { Router } from '@angular/router';
 })
 export class ClientViewBusinessComponent implements OnInit {
 
-  Business: any;
+  private id: String;
+
+  business: any;
+  private services: any;
+  private reviews: any;
+  private questions: any;
+  private announcements: any;
 
 
   constructor(private getBusinessService: GetBusinessService,
@@ -17,14 +25,15 @@ export class ClientViewBusinessComponent implements OnInit {
               ) { }
 
   ngOnInit() {
+    this.id = localStorage.getItem('businessID');
+    this.business = this.getBusinessService.guestGetBusiness(this.id).subscribe(Business => {
+      this.business = Business;
+      this.services = Business.services;
+      this.questions= Business.questions;
+      this.reviews= Business.reviews;
+      this.announcements= Business.announcements;      
+    })
   }
-
-
-  onBusinessSelected(event){
-      var id = event.target.value;   
-      this.Business = this.getBusinessService.clientGetBusiness(id);
-  }
-
 
 
 }

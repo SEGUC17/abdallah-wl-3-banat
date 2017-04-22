@@ -44,7 +44,7 @@
                         <div *ngFor="let business of businesses">
                                 <li style = "float: left; margin-left: 10px;" >
                                 <br>
-                                    <figure> <img style = "height:300px; !important" src="http://images5.fanpop.com/image/photos/30900000/beautiful-pic-different-beautiful-pictures-30958249-500-375.jpg">
+                                    <figure> <img style = "height:300px; !important" src="{{business.profilepicture}}">
                                         <br>
                                             Name: {{business.businessName}} <br> 
                                             Rating: {{business.rating}} <br> 
@@ -64,7 +64,7 @@
                         <div *ngFor="let TopBusiness of TopBusinesses">
                         <li style = "float: left; margin-left: 10px;" >
                         <br>
-                           <figure> <img style = "height:300px; !important" src="http://images5.fanpop.com/image/photos/30900000/beautiful-pic-different-beautiful-pictures-30958249-500-375.jpg">
+                           <figure> <img style = "height:300px; !important" src="{{TopBusiness.profilepicture}}">
                            <br>
                              Name: {{TopBusiness.businessName}} <br> 
                              Rating: {{TopBusiness.rating}} <br> 

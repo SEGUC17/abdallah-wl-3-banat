@@ -1,18 +1,259 @@
-<p>
-  client-view-business works!
-</p>
 <div class="container">
 
-  <div class="span4 profile">
-      <h2 class="title">{{Business.businessName}}</h2>
-      
-      <h4 class="description">{{Business.description}}</h4>
-      <h5 class="description">{{Business.info}}</h5>
-  </div>
+    <div class="row">
+      <br><br><br><br>
+      <div class="span4 profile">
+          <img style = "height:300px;" src={{business.profilepicture}}> 
+      </div>
 
-  <div class="span4 profile">
+      <div class="span6 profile">
+          <h1 class="title"><span class="color-text">{{business.businessName}}</span></h1>   
+
+
+          <!--
+            <style>
+                        @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+                    fieldset, label { margin: 0; padding: 0; }
+                    body{ margin: 20px; }
+                    h1 { font-size: 1.5em; margin: 10px; }
+
+                    /****** Style Star Rating Widget *****/
+
+                    .rating { 
+                    border: none;
+                    float: left;
+                    }
+
+                    .rating > input { display: none; } 
+                    .rating > label:before { 
+                    margin: 5px;
+                    font-size: 1.25em;
+                    font-family: FontAwesome;
+                    display: inline-block;
+                    content: "\f005";
+                    }
+
+                    .rating > .half:before { 
+                    content: "\f089";
+                    position: absolute;
+                    }
+
+                    .rating > label { 
+                    color: #ddd; 
+                    float: right; 
+                    }
+
+                    /***** CSS Magic to Highlight Stars on Hover *****/
+
+                    .rating > input:checked ~ label, /* show gold star when clicked */
+                    .rating:not(:checked) > label:hover, /* hover current star */
+                    .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+                    .rating > input:checked + label:hover, /* hover current star when changing rating */
+                    .rating > input:checked ~ label:hover,
+                    .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+                    .rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+            </style>
+
+
+            <fieldset class="rating">
+                <input (click) = "onRate(5)" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                <input (click) = "onRate(4)" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                <input (click) = "onRate(3)" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                <input (click) = "onRate(2)" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                <input (click) = "onRate(1)" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+            </fieldset>
+
+            -->
+
+            	<!-- Start Toggle -->
+                <div class="accordion" id="toggleArea">
+                
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseOne">
+                                Description
+                                <span class="font-icon-plus"></span>
+                                <span class="font-icon-minus"></span>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                {{business.description}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseTwo">
+                               General Info
+                            <span class="font-icon-plus"></span>
+                            <span class="font-icon-minus"></span>
+                        </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                {{business.info}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseThird">
+                            Contact Info
+                            <span class="font-icon-plus"></span>
+                            <span class="font-icon-minus"></span>
+                        </a>
+                        </div>
+                        <div id="collapseThird" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                Phone  :  {{business.phone}}
+                                <br>
+                                Location :  {{business.location}}
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- End Toggle -->
+      </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+        	<div class="span12">
+            	<hr>
+            </div>
+    </div>
+
+    <div class="row">
       
-  </div>
+        <div class="tabbable">
+  
+      <ul class="nav nav-tabs" id="myTab">
+          <li class="active"><a href="#services" data-toggle="tab">Services</a></li>
+          <li><a  href="#reviews" data-toggle="tab">Reviews</a></li>
+          <li><a  href="#questions" data-toggle="tab">Questions</a></li>
+          <li><a  href="#announcements" data-toggle="tab">Offers</a></li>
+      </ul>
     
+      <div class="tab-content" style="width:1300px;">
+          <div class="tab-pane fade in active" id="services">
+              <br>
+            <ul>
+              <div *ngFor="let service of services">
 
+                 <div class="span4 profile">
+                    <div class="image-wrap"> 
+                        <div class="hover-wrap">
+                            <span class="overlay-img"></span>
+                            <span class="overlay-text-thumb" >View Details</span>
+                        </div>
+                        <img style="max-width:100%; max-height:100%;" src="{{service.picture}}" >
+                    </div>
+                    <h3 class="profile-name">{{service.name}}</h3>
+                    <p class="profile-description">{{service.description}}</p>
+                    <a class="button" target="_blank" href="">Reserve for {{service.price}} EGP</a>
+                    <br><br><br><br> 
+                         
+                </div>   
+
+              </div>
+            </ul>
+          </div>                        
+        
+
+
+          <div class="tab-pane fade in" id="questions">
+              <br><br>
+             <ul>
+                <div class="container" *ngFor="let question of questions">
+                 <!--   <li style = "float: left; margin-left: 10px;" >  -->
+                        <div class="row">
+                            <!-- Start Blockquote -->
+                            <div class="span5">
+                                <h4 class="spec">Question</h4>
+                                
+                                <blockquote>
+                                    <p>{{question.question}}</p>
+                                    <small>
+                                        <cite title="John Bostic">A Client</cite>
+                                    </small>
+                                </blockquote>
+                            </div>
+                            <!-- End Blockquote -->
+                            
+                            <!-- Start Tooltip -->
+                            <div class="span5">
+                                <h4 class="spec">{{business.businessName}}'s Answer</h4>
+                                
+                                <p class="profile-description">{{question.answer}}</p>
+                                
+                            </div>
+                            <!-- End Tootlip -->
+                        </div>
+                 <!--   </li>  -->
+
+                    <div class="row">
+                            <div class="span12">
+                                <hr>
+                            </div>
+                    </div>
+
+                </div>  
+             </ul>  
+             <ul class="pager">
+                 <li><a href="#">Previous</a></li>
+                 <li><a href="#">Next</a></li>
+            </ul>   
+          </div>
+      
+
+          <div class="tab-pane fade in" id="reviews">
+             <ul>
+                <div *ngFor="let review of reviews">
+              <!--       <li style = "float: left; margin-left: 10px;" >    -->
+                        {{review.cid}} :  {{review.description}}
+                <!--    </li>   -->
+                    <br>
+                </div>  
+             </ul>     
+          </div>
+
+
+          <div class="tab-pane fade in" id="announcements">
+                <div class="container" *ngFor="let announcement of announcements"> 
+                                <h4 class="profile-description">{{announcement}}</h4>     
+                </div>
+  
+                
+                    <div class="span9">           
+                      <form id="contact-form" class="contact-form" action="#">
+                            <p class="contact-message">
+                              <textarea  id="contact_message" placeholder="Your Message" name="message" rows="15" cols="40"></textarea>
+                            </p>
+                            <p class="contact-submit">
+                              <a id="contact-submit" class="submit" href="#">Send Your Email</a>
+                            </p>
+                            
+                         
+                        </form>
+                    
+                    </div>
+                
+
+          </div>
+
+
+
+    
+    
+    </div>
+    
+    </div>
+   </div>
 </div>
