@@ -1,0 +1,39 @@
+
+
+
+  <h3 class="title-description">AddService.</h3>
+     <div class="row">
+        	<div class="span9">
+
+        	     <form (submit) = "onAddingServiceSubmit()">
+            	  <p class="contact-name">
+            		<input id="contact_name" type="text" [(ngModel)]="name" name ="name" placeholder="ServiceName" value="" name="name" />
+                </p>
+                <p class="contact-email">
+                	<input id="contact_email" type="text" [(ngModel)]="description" name ="description" placeholder="description" value="" name="description" />
+                </p>
+                <p class="contact-message">
+                <input id="contact_email" type="text" [(ngModel)]="price" name ="price" placeholder="price" value="" name="price" />
+
+                </p>
+
+                
+                <input type="file" [(ngModel)]="picture" name="picture" accept="image/*">
+                <p class = "contact-submit">
+                <button type="submit">Submit</button>
+                </p>
+                
+
+                	
+               
+
+
+                      <div id="response">
+
+                      </div>
+               </form>
+
+        </div>
+                </div>
+                      
+
