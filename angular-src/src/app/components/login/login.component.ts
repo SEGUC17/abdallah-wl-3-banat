@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {FlashMessagesService} from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -11,7 +11,8 @@ import {AuthService} from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   username:String;
   password:String;
-  constructor(private flashMessage:FlashMessagesService,
+  constructor(
+  private flashMessage:FlashMessagesService,
   private router:Router,
   private authService:AuthService) {}
 
@@ -34,9 +35,11 @@ export class LoginComponent implements OnInit {
       else this.router.navigate(['admins']);
     }
       else{
+  
       this.flashMessage.show(data.msg,{cssClass:'alert-danger',timeout:3000});
       this.router.navigate(['login']);
-    }
+    
+  }
     })
   }
 

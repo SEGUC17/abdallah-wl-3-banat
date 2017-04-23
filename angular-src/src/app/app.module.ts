@@ -14,13 +14,17 @@ import { ClientViewBusinessComponent } from './components/client-view-business/c
 import { ViewAllComponent } from './components/view-all/view-all.component'; 
 import { ViewService } from './services/view.service';
 import { BproviderProfileComponent } from './components/bprovider-profile/bprovider-profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { AuthService } from './services/auth.service';
 
 
 const appRoutes: Routes =  [
   {path:'', component: ViewAllComponent},
   {path:'Client/ViewBusiness', component: ClientViewBusinessComponent},
   {path:'ViewBusiness', component: GuestViewBusinessComponent},
-  {path:'Provider/MyProfile', component: BproviderProfileComponent}
+  {path:'Provider/MyProfile', component: BproviderProfileComponent},
+  {path:'login',component: LoginComponent}
 ]
 
 @NgModule({
@@ -30,15 +34,17 @@ const appRoutes: Routes =  [
     GuestViewBusinessComponent,
     ClientViewBusinessComponent,
     ViewAllComponent,
-    BproviderProfileComponent
+    BproviderProfileComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FlashMessagesModule
   ],
-  providers: [GetBusinessService,ViewService,PaginationService,GetBproviderService],
+  providers: [GetBusinessService,ViewService,PaginationService,GetBproviderService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

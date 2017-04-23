@@ -18,11 +18,18 @@ export class GetBproviderService {
 
     let headers= new Headers();
     this.loadToken();
-    headers.append('Content-Type','applications/json');
+    //headers.append('Content-Type','applications/json');
     headers.append('Authorization',this.AuthToken);
-    return this.http.get('http://localhost:8080/bproviders/MyProfile').map(res=>res.json());
+    return this.http.get('http://localhost:8080/bproviders/MyProfile',{headers:headers}).map(res=>res.json());
   }
 
-
+  postAnnouncement(id,announcement){
+    console.log(announcement);
+    let headers= new Headers();
+    this.loadToken();
+    headers.append('Content-Type','application/json');
+    headers.append('Authorization',this.AuthToken);
+    return this.http.post('http://localhost:8080/bproviders/PostAnnouncement',announcement,{headers:headers}).map(res=>res.json());
+  }
 
 }

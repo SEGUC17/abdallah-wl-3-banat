@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewService } from '../../services/view.service';
 import { Router, ActivatedRoute , NavigationExtras } from '@angular/router';
+import { GetBusinessService } from '../../services/get-business.service';
 
 @Component({
   selector: 'app-view-all',
@@ -12,7 +13,7 @@ export class ViewAllComponent implements OnInit {
   businesses:any;
   TopBusinesses:any;
 	
-  constructor(private viewService:ViewService,private router:Router) { 
+  constructor(private viewService:ViewService,private router:Router,private getBusinessService:GetBusinessService) { 
   	}
 
   ngOnInit() {
@@ -34,6 +35,11 @@ onButtonClicked(event){
   console.log(id);
   localStorage.setItem('businessID',id);
   this.router.navigate(['/ViewBusiness']);
+  this.getBusinessService.guestGetBusiness(id).subscribe(Business => {
+      localStorage.setItem('rating',Business.rating);
+      console.log(Business.rating);
+  });
+
 }
 
 }

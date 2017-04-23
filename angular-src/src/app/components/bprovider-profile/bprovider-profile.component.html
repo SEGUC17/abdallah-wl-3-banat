@@ -7,25 +7,10 @@
       </div>
 
       <div class="span6 profile">
-          <h1 class="title"><span class="color-text">{{business.businessName}}</span></h1>   
+          <h1 class="title"><span class="color-text">HI {{business.businessName}}</span></h1>   
 
             	<!-- Start Toggle -->
                 <div class="accordion" id="toggleArea">
-
-                  <div class="accordion-group">
-                        <div class="accordion-heading togglize">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseOne">
-                                Personal Information
-                                <span class="font-icon-plus"></span>
-                                <span class="font-icon-minus"></span>
-                            </a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                {{business.description}}
-                            </div>
-                        </div>
-                    </div>
                 
                     <div class="accordion-group">
                         <div class="accordion-heading togglize">
@@ -70,6 +55,21 @@
                                 Phone  :  {{business.phone}}
                                 <br>
                                 Location :  {{business.location}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseFourth">
+                                Personal Information
+                                <span class="font-icon-plus"></span>
+                                <span class="font-icon-minus"></span>
+                            </a>
+                        </div>
+                        <div id="collapseFourth" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                {{MyInfo.firstname}}
                             </div>
                         </div>
                     </div>
@@ -184,9 +184,20 @@
 
 
           <div class="tab-pane fade in" id="announcements">
-                    <div *ngFor="let announcement of announcements"> 
+                    <div class="span9" *ngFor="let announcement of announcements"> 
                                 <h4 class="profile-description">{{announcement}}</h4>     
                     </div>
+
+                    <div class="span9">           
+                            <p class="contact-message">
+                              <textarea  id="contact_message" placeholder="Enter your announcement..." [(ngModel)]="newAnnouncement" name="newAnnouncement" rows="10" cols="70"></textarea>
+                            </p>
+                            <p class="contact-submit">
+                              <a id="contact-submit" class="submit" type="submit" (click)="postAnnouncement()" >Post</a>
+                            </p>            
+                    
+                    </div>
+                
           </div>
 
  

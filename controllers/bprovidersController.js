@@ -326,7 +326,7 @@ if(err) res.send('You do not have business');
                           if(!Business)
                               res.send("This business couldnt be found or may have been deleted ");
                           else
-                      res.json({Success : true});
+                              res.json({Success : true});
              });
               }
         });
