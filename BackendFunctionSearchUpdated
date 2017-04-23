@@ -1,0 +1,13 @@
+searchBusinessUpdated: function(req, res, next) {
+  var search = req.body.businessName
+    business.find({ businessName: new RegExp(req.query.q, "i") })
+        .exec((err, buisnessName) => {
+           if(err) return res.json({success:false, msg:'Invalid parameters'});
+           if(!res) return res.json({success:false, msg:'No business found'});
+             return res.json( {
+                businessName: buisnessName,
+                query: req.query.q
+            });
+
+        });
+}
