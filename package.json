@@ -1,0 +1,23 @@
+{
+  "name": "seproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies" :{
+    "express":"*",
+    "mongoose":"*",
+    "bcryptjs":"*",
+    "cors":"*",
+    "multer":"*",
+    "jsonwebtoken":"*",
+    "express-validator":"*",
+    "body-parser":"*",
+    "passport":"*",
+    "passport-jwt":"*"
+  },
+  "author": "",
+  "license": "ISC"
+}
