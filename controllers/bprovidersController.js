@@ -12,19 +12,17 @@ var bprovidersController = {
   loadProfile : function(req,res){
     bprovidersController.getBusProvider(req.user._id,function(err,Provider){
     if(err)
-              res.json("There's an internal mongoose error " + err);
-          else
+              return res.json({success:false,unauthorized:false,msg:'Invalid Parameters'});
               if(!Provider)
-                  res.json("This provider couldnt be found or may have been deleted ");
-              else
+                  return res.json({success:false,unauthorized:true,msg:'Only the provider of this business can view it'});
             bprovidersController.getBusiness(Provider._id,function(err1, Business){
               if(err1)
-                          res.send("There's an internal mongoose error " + err1);
+                        return res.json({success:false,unauthorized:false,msg:'Invalid parameters'});
                       else
                           if(!Business)
-                              res.send("This business couldnt be found or may have been deleted ");
+                            return res.json({success:false,unauthorized:false,msg:'Business not found'});
                           else
-                      res.json({My_Info : Provider , Business_info : Business});
+                      return res.json({success:true,unauthorized:false,Provider:Provider , Business:Business});
             });
     });
   },
@@ -50,16 +48,9 @@ getBusiness : function(id,callback){
 },
   editP:function(req,res){
 
-  if (req.body.username){
-      user.findOneAndUpdate({_id:req.user._id},{$set:{username:req.body.username}},{new:true},function(err,res){
-    if(err){
-  return res.json({susccess:false,msg:'Invalid paramaters'});
-    }else{
-          }
-      })
-
-  }
+    if(req.user.type==1){
       if(req.body.password){
+
    user.findOneAndUpdate({_id:req.user._id},{$set:{password:req.body.password}},{new:true},function(err,res){
     if(err){
 
@@ -153,6 +144,7 @@ getBusiness : function(id,callback){
                     }
                    })
                        }
+                     }
 
 
   },
@@ -175,8 +167,143 @@ getBusiness : function(id,callback){
       })
   }
             })
-                          }
+                          }else
+                          res.json({success:false,msg:'Only the provider of this business can edit this profile.'});
       },
+      postAnnouncement: function(req,res){
+
+
+        bprovidersController.getBusProvider(req.user._id,function(err,Provider){
+              if(err)
+                  res.json({success:false,msg:'Invalid parameters'});
+              else
+                if(!Provider)
+                  res.json({success:false,msg:'Business provider is not found'});
+              else
+              {
+                var description = req.body.description;
+                business.update({bproviderid: Provider._id },{$push:{announcements: description}},function(err1,Business){
+
+                  if(err1)
+                          res.json({success:false,msg:'Invalid parameters'});
+                      else
+                          if(!Business)
+                              res.json({success:false,msg:'Business is not found'});
+                          else
+                              res.json({Success : true});
+             });
+              }
+        });
+
+
+
+    },
+     createBusinessIfDeclined:function(req,res){
+  const query={uid: req.user._id}
+  bprovider.findOne(query,function(err,Bprovider){
+        if(err) return res.json({success:false, msg:'Invalid parameters'});
+  business.findOne({bproviderid:Bprovider._id},function (err,Business) {
+    if(err) return res.json({success:false, msg:'Something Went Wrong'});
+    Business.remove({bproviderid:Bprovider.bproviderid},function(err,r){
+      if(err) return res.json({success:false,msg:'Business Was not added'})
+      req.checkBody('businessName','Business Name is required').notEmpty();
+      req.checkBody('location','location is required').notEmpty();
+      req.checkBody('phone', 'phone is required').notEmpty();
+      req.checkBody('info', 'info is required').notEmpty();
+      req.checkBody('description', 'description is required').notEmpty();
+
+      var errors = req.validationErrors();
+
+if(errors){
+res.json({success:false,msg:'You must enter all fields.'})
+  }
+  else{
+      var newBusiness = new business({
+        bproviderid:Bprovider._id,
+        businessName:req.body.businessName,
+        location:req.body.location,
+        phone:req.body.phone,
+        ratingsGiven:[],
+        rating:0,
+        announcements:[],
+        reviews:[],
+        description:req.body.description,
+        profilepicture:'',
+        info:req.body.info,
+        questions:[],
+        isApproved:false,
+        services:[]
+      })
+      newBusiness.save(function(err,newBusinessSaved){
+        if(err) res.json({success:false,msg:'Invalid parameters'});
+        return res.json({success:true,msg:'Business added'});
+      })
+
+    }
+    })
+
+  })
+
+
+})
+
+
+
+},
+
+getBpandB: function(req,res){
+
+bprovider.findOne({uid:req.user._id},function(err,result){
+if(result){
+business.findOne({bproviderid:result._id},function(eror,result1){
+if(result1){
+
+  return res.json({provider:result , business:result1});
+}
+
+
+})
+
+  }
+})
+
+},
+deleteAnnouncement: function(req, res){
+    if(req.user.type == 1)
+    {
+      var uid = req.user._id;
+      var index = req.param('index');
+      bprovider.findOne({uid: uid}, (err, bpro) => {
+        if(err) return res.json({msg: "Invalid parameter"});
+        var bproviderid = bpro._id;
+
+        business.findOne({bproviderid: bproviderid}, (err, result) => {
+          if(err) return res.json('Invalid Parameter');
+          if(!result) return res.json('No business found');
+
+          var newAnns = [];
+          var announcements = result.announcements;
+          var annLength = announcements.length;
+
+          console.log(result);
+
+          if(index == annLength)
+           return res.json('Invalid Index');
+
+          for (var i = 0; i < annLength; i++){
+          if (i != index)
+            newAnns.push(announcements[i]);
+          }
+
+          business.findOneAndUpdate({bproviderid: bproviderid}, {announcements: newAnns}, {upsert: true}, (err, result) => {
+            if(err) return res.json('Invalid Parameter');
+            if(!result) return res.json('No business found');
+            return res.json('Announcement deleted');
+          });
+        });
+      });
+    }
+  },
   answerQuestion: function(req,res){
 
       var id = req.user._id;
@@ -208,12 +335,17 @@ getBusiness : function(id,callback){
   },
 
 AddService:function(req,res,next){
+  if (req.user.type==1){
       if(req.file){
     var image = req.file.filename;
       }
 req.checkBody('name','serviceName is required').notEmpty();
 req.checkBody('description','description is required').notEmpty();
 req.checkBody('price', 'price is required').notEmpty();
+req.checkBody('maxSlotClients','maxSlotClients is required').notEmpty();
+req.checkBody('slotDuration','slotDuration is required').notEmpty();
+
+
   var errors = req.validationErrors();
 
 if(errors){
@@ -224,7 +356,10 @@ res.json(errors)
     name : req.body.name,
     description : req.body.description,
     price : req.body.price,
-     picture : image
+     picture : image,
+     events : [],
+     slotDuration:req.body.slotDuration,
+     maxSlotClients:req.body.maxSlotClients
      }
   var uid=req.user._id;
   bprovider.findOne({uid:uid},function(err,result){
@@ -233,54 +368,24 @@ res.json(errors)
 
   bprovidersController.AddServiceToBusiness(bproviderid,service,function(err,Business){
 if(err) res.send('You do not have business');
-  else{Business.save(function(err,result1){
-    if(!result1)
-    res.json({success:false,msg:'Service was not added'});
-    else {
-      res.json({success:true,msg:'Service has been added'});
-    }
-  });
+  else{Business.save(function(err){});
+                        res.json({Success : true});
+
+
+
       }
 
    });
   });
+}
   }
 },
-
-  deleteAnnouncement: function(req, res){ 
-    var uid = req.user._id;
-    var index = req.param('index');
-    bprovider.findOne({uid: uid}, (err, bpro) => {
-      if(err) return res.json({msg: "Invalid parameter"});
-      var bproviderid = bpro._id;
-
-      business.findOne({bproviderid: bproviderid}, (err, result) => {
-        if(err) return res.json('Invalid Parameter');
-        if(!result) return res.json('No business found');
-
-        var newAnns = [];
-        var announcements = result.announcements;
-        var annLength = announcements.length;
-
-        for (var i = 0; i < annLength; i++){
-        if (i != index)
-          newAnns.push(announcements[i]);
-        }
-
-        business.findOneAndUpdate({bproviderid: bproviderid}, {announcements: newAnns}, {upsert: true}, (err, result) => {
-          if(err) return res.json('Invalid Parameter');
-          if(!result) return res.json('No business found');
-          return res.json('Announcement deleted');
-        });
-      });
-    });
-  },
-
     // DELETING SERVICE
 
     DeleteService : function(req,res,next){
+      if (req.user.type==1){
     var uid = req.user._id;
-    var index=req.param('index');
+    var serviceid = req.params.serviceid;
 
     bprovider.findOne({uid:uid},function(err,response){
     var bprovider= response._id;
@@ -296,7 +401,8 @@ if(err) res.send('You do not have business');
     var servicesLen = services.length;
 
     for (i=0;i<servicesLen;i++){
-    if (i!=index)
+    if (services[i]._id==serviceid){}
+    else
     newservices.push(services[i]);
     }
     bprovidersController.RemoveServiceFromBusiness(bprovider,newservices,function(err,business){
@@ -304,47 +410,63 @@ if(err) res.send('You do not have business');
     if(!business){
     res.send('error')
     }
-    else res.send('Service Deleted')
+    else
+                           res.json({Success : true});
 
                  })
              });
         });
+      }
     },
 
-    postAnnouncement: function(req,res){
+    searchBusiness: function(req, res, next) {
+  var search = req.body.businessName
+    business.find({ businessName: new RegExp(req.query.q, "i") })
+        .exec((err, buisnessName) => {
+           if(err) return res.json({success:false, msg:'Invalid parameters'});
+           if(!res) return res.json({success:false, msg:'No business found'});
+             return res.json( {
+                businessName: buisnessName,
+                query: req.query.q
+            });
 
-
-        bprovidersController.getBusProvider(req.user._id,function(err,Provider){
-              if(err)
-                  res.json("There's an internal mongoose error " + err);
-              else
-                if(!Provider)
-                  res.json("This provider couldnt be found or may have been deleted ");
-              else  
-              {
-                var description = req.body.description;
-                business.update({bproviderid: Provider._id },{$push:{announcements: description}},function(err1,Business){
-
-                  if(err1)
-                          res.send("There's an internal mongoose error " + err1);
-                      else
-                          if(!Business)
-                              res.send("This business couldnt be found or may have been deleted ");
-                          else
-                      res.json({Success : true});
-             });
-              }
         });
+},
 
-         
 
-    },
 
     FindBusinessById : function(id,callback){
     var query = {bproviderid : id };
     business.findOne(query,callback);
 
     },
+
+    /*FindBusiness: function(req,res){
+      var id = req.user._id;
+      bprovider.findOne({uid:id},(err,Bprovider)=>{
+        if(err){
+          return res.json({success:false,unauthorized:false,msg:'invalid parameter'});
+        }
+        if(!Bprovider){
+          return res.json({success:false,unauthorized:true,msg:'Only Business Providers are allowed to visit this page.'});
+        }
+        else{
+          business.findOne({bproviderid:Bprovider._id},(err,business)=>{
+            if(err){
+              return res.json({success:false,unauthorized:false,msg:'invalid parameters'});
+            }
+            if(!business){
+              return res.json({success:false,unauthorized:false,msg:'Business not found'});
+            }
+            else{
+              return res.json({success:true,unauthorized:false,result:business});
+            }
+          })
+        }
+      })
+
+    },*/
+
 
 
     AddServiceToBusiness :function(id,service, callback){
@@ -385,13 +507,17 @@ viewTop: function(req, res){
 
 },
 editService: function(req,res){
-var id = req.param('bid');
-var serid = req.param('serviceid');
-business.findOne({_id:id},(err,business)=>{
+  bprovider.findOne({uid:req.user._id},(err,Bprovider)=>{
+    console.log(Bprovider);
+  if(err) return res.json({success:false,msg:'Invalid Parameters'});
+  if(!Bprovider) return res.json({success:false,msg:'Only the provider of this business can edit its services.'});
+  var id = req.param('bid');
+  var serid = req.param('serviceid');
+  business.findOne({_id:id},(err,business)=>{
   if(err)
-    return res.json({msg:'Invalid Parameters'});
+    return res.json({success:false,msg:'Invalid Parameters'});
   if(!business)
-    return res.json({msg:'No Business found with that ID'});
+    return res.json({success:false,msg:'No Business found with that ID'});
   var servicess = business.services;
   servicess.forEach(function(service){
     if(service._id==serid){
@@ -402,12 +528,16 @@ business.findOne({_id:id},(err,business)=>{
       if(req.body.price)
         service.price=req.body.price;
     }
-  business.save((err,res)=>{
   })
-  return res.send(business);
+  business.save((err,result)=>{
+  return res.json({success:true,msg:'Service edited successfully.',result:result});
   })
 
+
 })
+
+})
+
 },
 editPicture: function(req,res){
 var id = req.param('bid');
@@ -441,13 +571,40 @@ viewReviews:  function(req, res){
                 res.json({Reviews: Business.reviews});
     });
 },
+ viewServices: function(req,res){
+  var bpid = req.user._id;
+  bprovider.findOne({uid:bpid},(err,bprovider)=>{
+    if(err) return res.json({success:false,msg:'invalid parameters'});
+    if(!bprovider){
+      return res.json({success:false,msg:'Only the provider of this business is allowed to view its services'});
+    }
+    else{
+      var id = req.param('bid');
+   business.findOne({_id:id},(err,business)=>{
+    if(err){
+      return res.json({success:false,msg:'Invalid Parameters'});
+    }
+    if(!business){
+      return res.json({success:false,msg:'No Business Found'});
+    }
+    else{
+      if(business.services.length == 0){
+        return res.json({success:false,msg:'Business has no services'});
+      }
+      else{
+        return res.json({success:true,services:business.services});
+      }
+    }
+   });
+    }
+  })
 
+ },
 /////////////////////// 	vv 	DataBase Functions  vv	\\\\\\\\\\\\\\\\\\\\\\\\
 
-findBusinessById: function(id,callback){
-    var query = {bproviderid: id};
-    business.findOne(query,callback);
-}
 
 }
+
+
+
 module.exports = bprovidersController;

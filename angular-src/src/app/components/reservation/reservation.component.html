@@ -1,0 +1,27 @@
+<angular2-fullcalendar [options]="calendarOptions()">{{options | json}}</angular2-fullcalendar>
+<div style = "margin-left:600px !important; margin-top:40px !important;">
+<button *ngIf=!isValid class="button" style="margin-left:350px !important;" data-toggle="modal" data-target="#myModal" >Choose a slot</button>
+<button *ngIf="isValid" (click)="cancelReservation()" class="button" >Cancel reservation</button>
+<button *ngIf="isValid" (click)="openCheckout()" class="button" style="margin-left:30px !important;">Purchase</button>
+</div>
+<div id="myModal" class="modal fade" role="dialog" style=" display:none !important;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="color:black !important;">Choose a slot timing</h4>
+      </div>
+      <div class="modal-body">
+        <label>Date</label>
+        <input type="date" name="dateChosen" [(ngModel)]="dateChosen" />
+        <label>Time</label>
+        <input type="time" name="timeChosen" [(ngModel)]="timeChosen" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-default" (click)="chooseSlot()" data-dismiss="modal" >Validate slot</button>
+      </div>
+    </div>
+
+  </div>
+</div>

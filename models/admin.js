@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var applicationsSchema = mongoose.Schema({bid:String});
+var applicationsSchema = mongoose.Schema({businessName:String});
 var adminSchema = mongoose.Schema({
   uid:{
     type:String,

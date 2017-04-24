@@ -1,0 +1,82 @@
+<div id="work" class="page">
+
+<!-- Contact Section -->
+<div id="contact" class="page">
+<div class="container">
+    <!-- Title Page -->
+    <div class="row">
+        <div class="span12">
+            <div class="title-page">
+                <h2 class="title">Edit Your Profile</h2>
+            </div>
+        </div>
+    </div>
+    <!-- End Title Page -->
+
+    <!-- Contact Form -->
+    <div class="row">
+    	<div class="span3">
+        	<div class="contact-details">
+        		<h3>Your Profile</h3>
+                <ul>
+
+                    <li>Username: {{Cusername}}</li>
+                    <li>Email: {{Cemail}}</li>
+                    <li>Business Name: {{CbName}}</li>
+                    <li>location: {{Clocation}}</li>
+                    <li>Phone Number: {{Cphone}}</li>
+                    <li>Information: {{Cinfo}}</li>
+                    <li>Information: {{Cinfo}}</li>
+
+                </ul>
+            </div>
+        </div>
+
+      <div class="span9">
+<!--edit P form -->
+        	<form (submit)="onEditPSubmit()" id="contact-form" class="contact-form" >
+            	<p class="contact-pass">
+                	<input id="contact_pass" type="password" [(ngModel)]="password" placeholder="Password" value="" name="password" />
+                </p>
+                <p class="contact-email">
+                	<input id="contact_email" type="email" [(ngModel)]="email" placeholder="Email" value="" name="email" />
+                </p>
+                <p class="contact-bName">
+            		<input id="contact_bName" type="text" [(ngModel)]="bName" placeholder="Business Name" value="" name="bName" />
+                </p>
+                <p class="contact-location">
+            		<input id="contact_location" type="text" [(ngModel)]="location" placeholder="Location" value="" name="location" />
+                </p>
+                <p class="contact-phone">
+            		<input id="contact_phone" type="number" [(ngModel)]="phone" placeholder="Phone Number" value="" name="phone" />
+                </p>
+
+              <p class="contact-info">
+                	<textarea id="contact_info" type="text" [(ngModel)]="info" placeholder="Your Information" name="info" rows="15" cols="40"></textarea>
+                </p>
+
+                <p class="contact-submit">
+                	<!--a id="contact-submit" class="submit" href="#">Save Your Changes</a-->
+                  <input type ="submit" class = "submit" value = "Save Your Changes">
+                </p>
+
+                <div id="response">
+
+                </div>
+            </form>
+
+
+
+
+
+
+
+<!--/end form -->
+        </div>
+
+
+    </div>
+    <!-- End Contact Form -->
+</div>
+</div>
+<!-- End Contact Section -->

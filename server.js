@@ -6,6 +6,10 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var config = require('./config/database');
 var expressValidator = require('express-validator');
+var stripe = require('stripe')('sk_test_J1iqETsdwrs8H9biAUfa4let');
+
+
+
 
 const port = 8080;
 
@@ -28,6 +32,8 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 
 

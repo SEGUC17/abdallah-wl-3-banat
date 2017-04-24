@@ -10,47 +10,58 @@ const config = require('../config/database');
 
 var guestsController = {
   loadBusiness : function(req,res){
-  		guestsController.getBusiness(req.params.id,function(err,BusProfile){
+      guestsController.getBusiness(req.param('id'),function(err,BusProfile){
+
             if(err)
                 res.json("There's an internal mongoose error :" + err);
             else
                 if(!BusProfile)
+
                     res.json("This profile couldnt be found or may have been deleted " + BusProfile);
-                else
+                else{
                     res.json({Profile :  BusProfile});
-  		});
+}
+      });
    },
 
 /////////////////////// 	 	DataBase Functions		\\\\\\\\\\\\\\\\\\\\\\\\
 
 
 	getBusiness : function(id,callback){
-    	var query = {bproviderid: id};
+    	var query = {_id: id};
     	business.findOne(query, callback);
 	},
   login : function(req,res){
-    var username = req.body.username;
-    var password = req.body.password;
-    user.findOne({username:username},function(err,found){
-      if(err) throw err;
-      if(!found)
-      return res.json({success:false,msg:'Username not found'});
-      user.findOne({password:password},function(err,result){
-        if(err) throw err;
-        if(!result)
-        return res.json({success:false,msg:'Wrong password'});
-        const token = jwt.sign(result,config.secret,{
-          expiresIn:604800
-        });
-        if(result.type == 0)
-        return res.json({success:true,msg:'successful logged in as a client',token:'JWT '+token,user:{id : result._id,username:result.username,type:user.type}});
-        else if(result.type == 1)
-        return res.json({success:true,msg:'successful logged in as a business provider',token:'JWT '+token,user:{id : result._id,username:result.username,type:user.type}});
-        return res.json({success:true,msg:'successful logged in as a admin',token:'JWT '+token,user:{id : result._id,username:result.username,type:user.type}});
-      })
-    })
+   req.checkBody('username','Username is required!').notEmpty();
+   req.checkBody('password','Password is required!').notEmpty();
+   var username = req.body.username;
+   var password = req.body.password;
+
+   var err = req.validationErrors();
+     if(err){
+     return res.json({success:false,msg:"All fields must be entered!"});
+   }
+   user.findOne({username:username},function(err,found){
+     if(err) throw err;
+     if(!found)
+     return res.json({success:false,msg:'Username not found'});
+     user.findOne({password:password,username:username},function(err,result){
+       if(err) throw err;
+       if(!result)
+       return res.json({success:false,msg:'Wrong password'});
+       const token = jwt.sign(result,config.secret,{
+         expiresIn:604800
+       });
+       if(result.type == 0)
+       return res.json({success:true,msg:'Logged in successfully as a client',token:'JWT '+token,user:{id : result._id,username:result.username,type:result.type}});
+       else if(result.type == 1)
+       return res.json({success:true,msg:'Logged in successfully as a business provider',token:'JWT '+token,user:{id : result._id,username:result.username,type:result.type}});
+       return res.json({success:true,msg:'Logged in successfully as a admin',token:'JWT '+token,user:{id : result._id,username:result.username,type:result.type}});
+     })
+   })
 
 },
+
 
 
 
@@ -89,7 +100,6 @@ searchBusiness:function(req,res){
     return res.json({success:true,business:result});
   })
 },
-
 register:function(req,res){
   var type = req.param('type');
   if(type == 0){
@@ -110,16 +120,15 @@ register:function(req,res){
      isBanned : false
    })
    newClient.save(function(err,clientSaved){
-     if(err) return res.json({success:false,msg:'Registertion unsuccessful'});
+     if(err) res.json({success:false,msg:'Registertion unsuccessful'});
      return res.json({success:true,msg:'Registered successful as a client'});
    })
 
  })}
   else if(type == 1){
     business.findOne({businessName:req.body.businessName},function(err,duplicate){
-      if(err) return res.json({success:false,msg:'Invalid buisnessName'})
-      if(duplicate) return res.json({success:false, msg:'Business name already in use'})
-    })
+      if(err) return res.json({success:false,msg:'Invalid business name'});
+      if(duplicate) return res.json({success:false,msg:'Business name already in use'});
     var newUser = new user({
       username:req.body.username,
       password:req.body.password,
@@ -131,7 +140,8 @@ register:function(req,res){
        firstname : req.body.firstname,
        lastname : req.body.lastname,
        email : req.body.email,
-       birthdate:req.body.birthdate
+       birthdate:req.body.birthdate,
+       phone:req.body.phone
      })
      newbProvider.save(function(err,newbProviderSaved){
        if(err) return res.json({success:false,msg:'Registertion unsuccessful'});
@@ -158,8 +168,8 @@ register:function(req,res){
      })
 
     })
-
-  }
+})
+}
   else if(type == 2){
     var newUser = new user({
       username:req.body.username,
@@ -174,18 +184,18 @@ register:function(req,res){
        email : req.body.email,
        applications:[]
      })
-     newAdmin.save(function(err,adminSaved){
-       if(err) return res.json({success:false,msg:'Registertion unsuccessful'});
-       return res.json({success:true,msg:'Registered successful as an Admin'});
-     })
+    newAdmin.save(function(err,adminSaved){
+      if(err) return res.json({success:false,msg:'Registeration unsuccessful'});
+      return res.json({success:true,msg:'Registered successful as an Admin'});
+    })
 
    })
   }
   else{
     return res.json({success:false,msg:'Invalid registeration type'});
   }
-},
 
+},
 viewReviews: function(req, res){
     guestsController.findBusinessById(req.params.id,function(err,Business){
         if(err)
@@ -201,7 +211,7 @@ viewReviews: function(req, res){
 /////////////////////// 	 	DataBase Functions		\\\\\\\\\\\\\\\\\\\\\\\\
 
 findBusinessById: function(id,callback){
-    var query = {bproviderid: id};
+    var query = {_id: id};
     business.findOne(query,callback);
 }
 

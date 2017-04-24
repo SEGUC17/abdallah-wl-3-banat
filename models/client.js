@@ -22,6 +22,9 @@ creditcardinfo:{
 birthdate:{
   type:String
 },
+phone:{
+  type:Number
+},
 isBanned:{
   type:Boolean,
   default:false

@@ -1,0 +1,24 @@
+<div class="title-page">
+<h2 class = "title">Login </h2>
+<hr>
+</div>
+  <div   class = "login-container">
+<div class="span3">
+    <form id="contact-form" autocomplete="off" (submit) = "onLoginSubmit()">
+        <p class="contact-name">
+          <input id="contact_name" type="text" placeholder="Username" [(ngModel)] ="username" value="" name="username" />
+          </p>
+          <p class="contact-email">
+            <input id="contact_email" type="password" placeholder="Password" value="" [(ngModel)] ="password" name="password" />
+          </p>
+          <h3>Don't have an account?</h3> <a [routerLink]="['/register']">Sign up now!</a>
+          <p class="contact-submit">
+            <button type="submit"  class="button">Login</button>
+          </p>
+
+          <div id="response">
+
+          </div>
+      </form>
+</div>
+  </div>

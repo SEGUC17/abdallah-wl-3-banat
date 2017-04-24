@@ -1,0 +1,88 @@
+<div id="home-slider">
+    <div class="overlay"></div>
+
+    <div class="slider-text">
+    	<div></div>
+    </div>
+
+	<div class="control-nav">
+        <a id="prevslide" class="load-item"><i class="font-icon-arrow-simple-left"></i></a>
+        <a id="nextslide" class="load-item"><i class="font-icon-arrow-simple-right"></i></a>
+        <ul id="slide-list"></ul>
+
+        <a id="nextsection" href="#work"><i class="font-icon-arrow-simple-down"></i></a>
+    </div>
+</div>
+<div id="work" class="page">
+	<div class="container">
+  <div class="row">
+            <div class="span12">
+                <div class="title-page">
+                    <h3 class="title" style="font-weight:bolder;">Welcome To The Admin Page</h3>
+                </div>
+            </div>
+        </div>
+    	
+        <div class="row">
+        
+            <div class="span6">
+                
+                <div class="tabbable">
+                
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#tab1" data-toggle="tab">Providers</a></li>
+                        <li><a (click)="ViewClients()" href="#tab2" data-toggle="tab">Clients</a></li>
+                        <li ><a  href="#tab3" data-toggle="tab">Applications</a> </li>
+
+                    </ul>
+                 
+                    <div class="tab-content" style="width:1125px;">
+                        <div class="tab-pane fade in active" id="tab1">
+                             <ul style="list-style: none;">
+                               <li *ngFor="let provider of providers" style="display:inline-block !important; margin-right:15px; ">
+                               <div class="col-md-3">
+                                   <p style="color:#FFFFFF">Name: {{provider.firstname}} {{provider.lastname}}<br>
+                                   Email: {{provider.email}}<br>Birthdate: {{provider.birthdate}}<br><button
+                                    (click)="onRemoveProvider($event)" class="button button-mini" value={{provider._id}}>Remove</button></p>
+                                   </div>
+                               </li>
+
+                           </ul>      
+                        </div>
+                        <div class="tab-pane fade in" id="tab2">
+                           <ul style="list-style: none;">
+                               <li *ngFor="let client of clients" style="display:inline-block !important; margin-right:15px; ">
+                               <div class="col-md-3">
+                                   <p style="color:#FFFFFF">Name: {{client.firstname}} {{client.lastname}}<br>
+                                   Email: {{client.email}}<br>Address: {{client.address}}<br>Credit-Card Information: {{client.creditcardinfo}}<br>Birthdate: {{client.birthdate}}<br>Banned: <input style="background-color:rgba(0,0,0,0) !important;
+       border:none !important; color:#7F8289; width:30px; font-size:15px; color:#FFFFFF" [(ngModel)]="client.isBanned"> <br><button *ngIf="!client.isBanned" (click)="BanOrUnban($event,0)" class="button button-mini" value={{client._id}}>Ban</button><button *ngIf="client.isBanned"  
+       (click)="BanOrUnban($event,1)" class="button button-mini" value={{client._id}}>UnBan</button></p>
+                                   </div>
+                               </li>
+
+                           </ul>
+                        </div>
+                        <div class="tab-pane fade in" id="tab3">
+                         <ul style="list-style: none;">
+                              <li *ngFor="let application of applications">
+                                <div class="col-md-3">
+                                    <p style="color:#FFFFFF">Business Name: {{application.businessName}}
+                                    <br>
+                                    <button  (click)="acceptOrDecline($event,1)" class="button button-mini" value={{application.businessName}}>Accept</button>
+                                    <button (click)="acceptOrDecline($event,0)" class="button button-mini" value={{application.businessName}}>Decline</button>
+                                    </p>
+                                </div>
+                              </li>
+                       </ul>
+                    </div>
+                        
+                    </div>
+                            
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

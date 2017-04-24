@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var questionSchema = mongoose.Schema({question:String,answer:String});
-var serviceSchema = mongoose.Schema({name:String, description:String, price:Number, picture:String});
-var reviewsSchema = mongoose.Schema({description:String,cid:String});
+var serviceSchema = mongoose.Schema({name:String, description:String, price:Number, picture:String,maxSlotClients:Number,slotDuration:Number,events:[{title:String,start:String}]});
+var reviewsSchema = mongoose.Schema({description:String,name:String});
 var businessSchema = mongoose.Schema({
 bproviderid:{
   type:String,
@@ -36,6 +36,10 @@ info:{
 },
 questions:[questionSchema],
 isApproved:{
+  type:Boolean,
+  default:false
+},
+isDeclined:{
   type:Boolean,
   default:false
 },

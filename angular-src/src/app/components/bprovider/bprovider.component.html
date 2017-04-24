@@ -1,0 +1,341 @@
+<div *ngIf="!isDeclined()">
+<div class="container">
+    <div class="row">
+      <br><br><br><br>
+      <div class="span4 profile">
+          <img style = "height:300px;" src={{business.profilepicture}}>
+      </div>
+
+      <div class="span6 profile">
+          <h1 class="title" style="text-align: center;"><span class="color-text">{{business.businessName}}  </span><a [routerLink]="['/EditBpProfile']"><span class="font-icon-edit"></span></a>
+</h1>
+
+                <!-- Start Toggle -->
+                <div class="accordion" id="toggleArea">
+
+                  <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseZero">
+                                Personal Information
+                                <span class="font-icon-plus"></span>
+                                <span class="font-icon-minus"></span>
+                            </a>
+                        </div>
+                        <div id="collapseZero" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                <h4 class="profile-name">Username: {{user.username}}<br>
+                        Name: {{providerFirstname}} {{providerLastname}}<br>
+                        Email: {{providerEmail}} <br> Birthdate: {{providerBirthdate}} </h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseOne">
+                                Description
+                                <span class="font-icon-plus"></span>
+                                <span class="font-icon-minus"></span>
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                {{business.description}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseTwo">
+                               General Info
+                            <span class="font-icon-plus"></span>
+                            <span class="font-icon-minus"></span>
+                        </a>
+                        </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                {{business.info}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseThird">
+                            Contact Info
+                            <span class="font-icon-plus"></span>
+                            <span class="font-icon-minus"></span>
+                        </a>
+                        </div>
+                        <div id="collapseThird" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                Phone  :  {{business.phone}}
+                                <br>
+                                Location :  {{business.location}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End Toggle -->
+      </div>
+
+    </div>
+    <br>
+
+    <div class="row">
+            <div class="span12">
+                <hr>
+            </div>
+    </div>
+
+    <div class="row">
+
+        <div class="tabbable">
+
+      <ul class="nav nav-tabs" id="myTab">
+         <li class="active"><a  href="#viewall" data-toggle="tab">All Businesses</a></li>
+         <li><a  (click)="topBusinesses()" href="#viewtop" data-toggle="tab">Top 10 Businesses</a></li>
+          <li><a (click)="ViewService()" href="#services" data-toggle="tab">Services</a></li>
+          <li><a (click)="ViewReviews()" href="#reviews" data-toggle="tab">Reviews</a></li>
+          <li><a (click)="viewquestions()" href="#questions" data-toggle="tab">Questions</a></li>
+          <li><a  href="#announcements" data-toggle="tab">Announcements</a></li>
+          <li><a (click) = "searchForBusiness()" href="#search" data-toggle="tab">Search</a></li>
+
+
+      </ul>
+
+      <div class="tab-content" style="width:1300px;">
+          <div class="tab-pane fade in" id="services">
+              <br>
+            <ul>
+              <div *ngFor="let service of services">
+
+                 <div class="span4 profile">
+
+                        <img style="max-width:100%; max-height:100%;" src="{{service.picture}}" >
+                    <h4 class="profile-name">Name: {{service.name}}<br>
+                    Description: {{service.description}}<br>Price: {{service.price}}<br><button (click)="getServiceID($event)" class="button button-mini" value={{service._id}} [routerLink]="['/EditService']">Edit</button>
+                    <button (click)="DeleteService($event)" class="button button-mini" value={{service._id}}>Delete</button>
+                    </h4><br>
+                    <br><br><br><br>
+
+                </div>
+
+              </div>
+
+            </ul>
+            <button class="button button-small" [routerLink]="['/AddService']"> Add Service</button>
+
+          </div>
+
+
+
+          <div class="tab-pane fade in" id="questions">
+              <br><br>
+             <ul>
+
+                <div class="container" *ngFor="let question of questions">
+                 <!--   <li style = "float: left; margin-left: 10px;" >  -->
+                            <!-- Start Blockquote -->
+                            <div class="span5" *ngIf="!question.answer">
+                                <h4 class="spec">Question</h4>
+
+                                <blockquote>
+                                    <p>{{question.question}}</p>
+                                    <small>
+                                        <cite>Anonymous</cite>
+                                    </small>
+                                </blockquote>
+                                <button type="submit" class ="button" value={{question._id}} (click) = "onButtonClicked2($event)" >Answer</button>
+
+                            </div>
+
+                            <!-- End Blockquote -->
+
+                            <!-- Start Tooltip -->
+                            <div class="span5" *ngIf="!question.answer">
+                                <h4 class="spec">{{business.businessName}}'s Answer</h4>
+
+                                <p class="profile-description">{{question.answer}}</p>
+
+                            </div>
+                          </div>
+
+                          <div [(ngModel)]="help" name="help" ngDefaultControl *ngIf="help">
+             <button type="submit" class ="button" [(ngModel)]="x" name="x"value={{x}} ngDefaultControl (click) = "onButtonClicked3($event)" >Submit</button>
+                          <input type="text"[(ngModel)]="answer" name="answer" class="form-control">
+
+             </div>
+                            <!-- End Tootlip -->
+                 <!--   </li>  -->
+
+
+
+
+             </ul>
+
+          </div>
+
+
+          <div class="tab-pane fade in" id="reviews">
+             <ul>
+                 <div *ngFor="let review of reviews">
+                 <!--   <li style = "float: left; margin-left: 10px;" >  -->
+                        <div class="row">
+                            <!-- Start Blockquote -->
+                            <div class="span9">
+
+                                <blockquote>
+                                    <p>{{review.description}}</p>
+                                    <small>
+                                        <cite>By: {{review.name}}</cite>
+                                    </small>
+                                </blockquote>
+</div>
+       </div>
+               </div>
+             </ul>
+          </div>
+
+
+
+          <div class="tab-pane fade in" id="announcements">
+                    <div class="span9" *ngFor="let announcement of announcements;let i =index">
+                                <h4 class="profile-description">{{announcement}}<br><button (click)="deleteAnnouncement(i)" class="button button-mini" >Delete</button></h4>
+                    </div>
+
+                    <div class="span9">
+                            <p id="contact-form">
+                              <textarea style="background-color: #1f2021;"  id="contact_message" placeholder="Type Announcement Here..." [(ngModel)]="newAnnouncement" name="newAnnouncement" rows="10" cols="70"></textarea>
+                            </p>
+                            <p class="contact-submit">
+                              <button (click)="postAnnouncement()" class="button button-mini" >Post</button>
+                            </p>
+
+                    </div>
+
+          </div>
+          <div class="tab-pane fade in active" id="viewall">
+                        <ul style="list-style: none;">
+                        <div *ngFor="let business of businesses">
+                                <li style = "float: left; margin-left: 10px;" >
+                                <br>
+                                    <figure> <img style = "height:300px !important;" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                                        <br>
+                                            Name: {{business.businessName}} <br>
+                                            Rating: {{business.rating}} <br>
+                                            Description: {{business.description}} <br>
+                                            location: {{business.location}}
+                                        <figcaption><button class ="button" value={{business._id}} (click) = "onButtonClicked($event)">More Details</button></figcaption>
+                                    </figure>
+                                </li>
+
+                        </div>
+                        </ul>
+                        </div>
+                        <div class="tab-pane fade in" id="viewtop">
+                         <ul style="list-style: none;">
+                        <div *ngFor="let TopBusiness of TopBusinesses">
+                        <li style = "float: left; margin-left: 10px;" >
+                        <br>
+                           <figure> <img style = "height:300px; !important" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                           <br>
+                             Name: {{TopBusiness.businessName}} <br>
+                             Rating: {{TopBusiness.rating}} <br>
+                             Description: {{TopBusiness.info}} <br>
+                             location: {{TopBusiness.location}}
+                           <figcaption><button class ="button" value={{TopBusiness._id}} (click) = "onButtonClicked($event)">More Details</button></figcaption>
+                           </figure>
+                           </li>
+                        </div>
+                        </ul>
+                        </div>
+                        <div class="tab-pane fade in" id="search">
+
+                              <form (submit)="searchForBusiness($event)">
+                                  <div class="form-group">
+                                      <input class="form-control" type="text" placeholder="Search.. " [(ngModel)]="search" name="search"/>
+                                  </div>
+                              </form>
+
+                                <div *ngFor="let searchedBusiness of searchedBusinesses">
+
+                                        <figure> <img style = "height:300px; !important" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                                            <br>
+                                                Name: {{searchedBusiness.businessName}} <br>
+                                                Rating: {{searchedBusiness.rating}} <br>
+                                                Description: {{searchedBusiness.info}} <br>
+                                                location: {{searchedBusiness.location}}
+                                            <figcaption><button class ="button" value={{searchedBusiness._id}} (click) = "onBusinessClicked($event)">Learn More</button></figcaption>
+                                        </figure>
+                                        <br>
+
+
+                                </div>
+                        </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+  </div>
+</div>
+<div id="work" class="page" *ngIf="isDeclined()">
+
+    <div class="container">
+        <!-- Title Page -->
+        <div class="row">
+            <div class="span12">
+                <div class="title-page">
+                    <h2 class="title" style="color:red;">Your Application Has Been Declined</h2>
+                </div>
+            </div>
+        </div>
+        <div class="span9" style="width:1000px;">
+
+
+            <div class="accordion-group">
+                <div class="accordion-heading accordionize">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordionArea" href="#oneArea">
+                        Create Another Business
+                        <span class="font-icon-arrow-simple-down"></span>
+                    </a>
+                </div>
+                <div id="oneArea" class="accordion-body collapse">
+                    <div class="accordion-inner" style="width:1200px !important; margin-left:-25px !important; background:none;">
+                      <form id="contact-form"  (submit) = "onClickCreate()">
+                        <p class="contact-name">
+                          <input id="contact_name" type="text" placeholder="Business Name" [(ngModel)] ="businessName" value="" name="businessName" />
+                          </p>
+                          <p class="contact-name">
+                            <input id="contact_name" type="text" placeholder="Location" [(ngModel)] ="location" value="" name="locaion" />
+                            </p>
+                            <p class="contact-name">
+                              <input id="contact_name" type="text" placeholder="Phone Number" [(ngModel)] ="phoneNumber" value="" name="phoneNumber" />
+                              </p>
+                              <p class="contact-name">
+                                <input id="contact_name" type="text" placeholder="Business Description" [(ngModel)] ="description" value="" name="description" />
+                                </p>
+                                <p class="contact-name">
+                                  <input id="contact_name" type="text" placeholder="Business Info" [(ngModel)] ="info" value="" name="info" />
+                                  </p>
+                          <p class="contact-submit">
+                              <button type="submit"  class="button">Create Business</button>
+                            </p>
+
+                          <div id="response">
+
+                          </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
