@@ -14,7 +14,7 @@ router.post('/editPassword',passport.authenticate('jwt',{session:false}),clients
 
 router.get('/logout', passport.authenticate('jwt', {session:false}),
 clientsController.logout);
-router.post('/rate',passport.authenticate('jwt',{session:false}),clientsController.rate);
+router.post('/rate/:id',passport.authenticate('jwt',{session:false}),clientsController.rate);
 
 router.get('/ViewReviews/:id',clientsController.viewReviews);
 router.post('/PostReview/:id',passport.authenticate('jwt',{session:false}),clientsController.postReview);

@@ -80,7 +80,7 @@
           <li class="active"><a href="#services" data-toggle="tab">Services</a></li>
           <li><a  href="#reviews" data-toggle="tab">Reviews</a></li>
           <li><a  href="#questions" data-toggle="tab">Questions</a></li>
-          <li><a  href="#rate" data-toggle="tab">Rate</a></li>
+          <li><a  *ngIf=isClient() href="#rate" data-toggle="tab">Rate</a></li>
       </ul>
 
       <div class="tab-content" style="width:1185px;">

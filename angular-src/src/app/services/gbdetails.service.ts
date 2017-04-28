@@ -25,20 +25,16 @@ let headers = new Headers();
 const rate ={
   rating:rating
 }
-
 //console.log(this.authToken);
   headers.append('Content-Type','application/json');
        headers.append('Authorization', this.authToken);
 console.log(id);
-
    return this.http.post('http://localhost:8080/clients/rate/'+id,rate,{headers: headers})
       .map(res => res.json());
-
- 
  }
  loadToken(){
   const token =localStorage.getItem('id_token');
-  this.authToken = token; 
+  this.authToken = token;
 }
 
 }

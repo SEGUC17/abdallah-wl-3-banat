@@ -232,9 +232,10 @@ findAndUpdateBusinessReview: function(id,review,callback){
 },
 checkEventValidity:function(req,res){
   var isValid = false;
-  var date = moment().format('YYYY-MM-DDTHH:MM:SS');
-  if(moment(req.body.start).diff(moment().format('YYYY-MM-DDTHH:MM:SS'),'days')< 0)
-  return res.json({success:false,msg:'No business found matching the supplied business Id',isValid:false});
+  var date = moment();
+  var chosenDate = moment(req.body.start);
+  if(chosenDate.diff(date,'minutes')< 0)
+  return res.json({success:false,isValid:false});
   client.findOne({uid:req.user._id},function(err,Client){
   if(err) return res.json({success:false,msg:'Invalid parameters'});
   if(!Client) return res.json({success:false,msg:'You must be logged in as a client to check the validity of an event',isValid:false});

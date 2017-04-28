@@ -32,14 +32,15 @@ var guestsController = {
     	business.findOne(query, callback);
 	},
   login : function(req,res){
-   req.checkBody('username','Username is required!').notEmpty();
-   req.checkBody('password','Password is required!').notEmpty();
+
    var username = req.body.username;
    var password = req.body.password;
+   req.checkBody('username','Username is required!').notEmpty();
+   req.checkBody('password','Password is required!').notEmpty();
 
    var err = req.validationErrors();
      if(err){
-     return res.json({success:false,msg:"All fields must be entered!"});
+     return res.json({success:false,msg:'Please enter all fields'});
    }
    user.findOne({username:username},function(err,found){
      if(err) throw err;
@@ -103,6 +104,25 @@ searchBusiness:function(req,res){
 register:function(req,res){
   var type = req.param('type');
   if(type == 0){
+    req.checkBody('username','Username is required!').notEmpty();
+    req.checkBody('password','Password is required!').notEmpty();
+    req.checkBody('firstname','First name is required!').notEmpty();
+    req.checkBody('lastname','Last name is required!').notEmpty();
+    req.checkBody('email','Email is required!').notEmpty();
+    req.checkBody('creditcardinfo','Credit card info is required!')
+    req.checkBody('address','Address is required!').notEmpty();
+    req.checkBody('phone','Phone is required!').notEmpty();
+    req.checkBody('birthdate','Birth date is required!').notEmpty();
+    var err = req.validationErrors();
+      if(err){
+      return res.json({success:false,msg:'Please enter all fields!'});
+    }
+    if(isNaN(req.body.phone))
+    return res.json({success:false,msg:'Phone must be a number'});
+
+    if(!guestsController.validateEmail(req.body.email))
+    return res.json({success:false,msg:'Please enter a valid email address!'});
+
   var newUser = new user({
     username:req.body.username,
     password:req.body.password,
@@ -116,6 +136,7 @@ register:function(req,res){
      email : req.body.email,
      address : req.body.address,
      creditcardinfo : req.body.creditcardinfo,
+     phone:req.body.phone,
      birthdate :req.body.birthdate,
      isBanned : false
    })
@@ -126,6 +147,28 @@ register:function(req,res){
 
  })}
   else if(type == 1){
+    req.checkBody('username','Username is required!').notEmpty();
+    req.checkBody('password','Password is required!').notEmpty();
+    req.checkBody('firstname','First name is required!').notEmpty();
+    req.checkBody('lastname','Last name is required!').notEmpty();
+    req.checkBody('email','Email is required!').notEmpty();
+    req.checkBody('phone','Phone is required!').notEmpty();
+    req.checkBody('birthdate','Birthdate is required!').notEmpty();
+    req.checkBody('businessName','Business name is required!').notEmpty();
+    req.checkBody('location','Business location is required!').notEmpty();
+    req.checkBody('description','Business description is required!').notEmpty();
+    req.checkBody('info','Business description is required!').notEmpty();
+
+    var err = req.validationErrors();
+      if(err){
+      return res.json({success:false,msg:'Please enter all fields'});
+    }
+    if(isNaN(req.body.phone))
+    return res.json({success:false,msg:'Phone must be a number'});
+
+    if(!guestsController.validateEmail(req.body.email))
+    return res.json({success:false,msg:'Please enter a valid email address!'});
+
     business.findOne({businessName:req.body.businessName},function(err,duplicate){
       if(err) return res.json({success:false,msg:'Invalid business name'});
       if(duplicate) return res.json({success:false,msg:'Business name already in use'});
@@ -141,7 +184,6 @@ register:function(req,res){
        lastname : req.body.lastname,
        email : req.body.email,
        birthdate:req.body.birthdate,
-       phone:req.body.phone
      })
      newbProvider.save(function(err,newbProviderSaved){
        if(err) return res.json({success:false,msg:'Registertion unsuccessful'});
@@ -213,6 +255,10 @@ viewReviews: function(req, res){
 findBusinessById: function(id,callback){
     var query = {_id: id};
     business.findOne(query,callback);
+},
+  validateEmail:function(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 

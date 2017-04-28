@@ -10,19 +10,26 @@ import {AuthService} from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-username:any;
-password:any;
-firstname:any;
-lastname:any;
-email:any;
-address:any;
+clientusername:any;
+clientpassword:any;
+clientfirstname:any;
+clientlastname:any;
+clientemail:any;
+clientAddress:any;
 creditcardinfo:any;
-birthdate:any;
+clientbirthdate:any;
+clientphone:any;
+bproviderusername:any;
+bproviderpassword:any;
+bproviderfirstname:any;
+bproviderlastname:any;
+bprovideremail:any;
 businessName:any;
-phone:any;
-location:any;
-info:any;
-description:any;
+bproviderlocation:any;
+bproviderphone:any;
+bproviderbirthdate:any;
+bproviderinfo:any;
+bproviderdescription:any;
 
 
   constructor(private flashMessage:FlashMessagesService,
@@ -33,20 +40,16 @@ description:any;
   }
 
   onRegisterSubmitClient(){
-    //if(!this.username || !this.password || !this.firstname || !this.lastname || !this.email || !this.address || !this.creditcardinfo || !this.birthdate || !this.phone || isNaN(this.phone)){
-    //  this.flashMessage.show('Wrong data entry',{cssClass:'alert-danger',timeout:3000});
-    //  return;
-//  }
       const client = {
-      username:this.username,
-      password:this.password,
-      firstname:this.firstname,
-      lastnane:this.lastname,
-      email:this.email,
-      address:this.address,
+      username:this.clientusername,
+      password:this.clientpassword,
+      firstname:this.clientfirstname,
+      lastname:this.clientlastname,
+      email:this.clientemail,
+      address:this.clientAddress,
       creditcardinfo:this.creditcardinfo,
-      birthdate:this.birthdate,
-      phone:this.phone
+      birthdate:this.clientbirthdate,
+      phone:this.clientphone
     }
     this.authService.registerClient(client).subscribe(data => {
       if(data.success){
@@ -61,23 +64,18 @@ description:any;
 
   }
   onRegisterSubmitbProvider(){
-    if(!this.username || !this.password || !this.firstname || !this.lastname || !this.email || !this.location || !this.phone ||
-       !this.businessName || !this.description || !this.info || isNaN(this.phone)){
-         this.flashMessage.show('Wrong data entry',{cssClass:'alert-danger',timeout:3000});
-         return;
-       }
-
     const bprovider = {
-      username:this.username,
-      password:this.password,
-      firstname:this.firstname,
-      lastname:this.lastname,
-      email:this.email,
-      location:this.location,
-      phone:this.phone,
+      username:this.bproviderusername,
+      password:this.bproviderpassword,
+      firstname:this.bproviderfirstname,
+      lastname:this.bproviderlastname,
+      email:this.bprovideremail,
+      location:this.bproviderlocation,
+      phone:this.bproviderphone,
       businessName:this.businessName,
-      description:this.description,
-      info:this.info
+      birthdate:this.bproviderbirthdate,
+      description:this.bproviderdescription,
+      info:this.bproviderinfo
 
     }
     this.authService.registerbProvider(bprovider).subscribe(data =>{

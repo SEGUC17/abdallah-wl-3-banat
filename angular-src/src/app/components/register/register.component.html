@@ -17,31 +17,31 @@
                   <div class="span3" style="margin-top:15px !important;"id="tab1">
                       <form id="contact-form" style = "width:1100px !important;" (submit) = "onRegisterSubmitClient()">
                           <p class="contact-name">
-                            <input id="contact_name" type="text" placeholder="Username" [(ngModel)] ="username"  name="username" />
+                            <input id="contact_name" type="text" placeholder="Username" [(ngModel)] ="clientusername"  name="username" />
                             </p>
                             <p class="contact-name">
-                              <input id="contact_email" type="password" placeholder="Password"  [(ngModel)] ="password" name="password" />
+                              <input id="contact_email" type="password" placeholder="Password"  [(ngModel)] ="clientpassword" name="password" />
                             </p>
                             <p class="contact-name">
-                              <input id="contact_name" type="text" placeholder="First name" [(ngModel)] ="firstname"  name="firstname" />
+                              <input id="contact_name" type="text" placeholder="First name" [(ngModel)] ="clientfirstname"  name="firstname" />
                               </p>
                               <p class="contact-name">
-                                <input id="contact_name" type="text" placeholder="Last name" [(ngModel)] ="lastname"  name="lastname" />
+                                <input id="contact_name" type="text" placeholder="Last name" [(ngModel)] ="clientlastname"  name="lastname" />
                                 </p>
                                 <p class="contact-name">
-                                  <input id="contact_name" type="text" placeholder="Email" [(ngModel)] ="email"  name="email" />
+                                  <input id="contact_name" type="text" placeholder="Email" [(ngModel)] ="clientemail"  name="email" />
                                   </p>
                                   <p class="contact-name">
-                                    <input id="contact_name" type="text" placeholder="Address" [(ngModel)] ="Address" name="address" />
+                                    <input id="contact_name" type="text" placeholder="Address" [(ngModel)] ="clientAddress" name="address" />
                                     </p>
                                     <p class="contact-name">
-                                      <input id="contact_name" type="text" placeholder="Phone number" [(ngModel)] ="phone"  name="phone" />
+                                      <input id="contact_name" type="text" placeholder="Phone number" [(ngModel)] ="clientphone"  name="phone" />
                                       </p>
                                     <p class="contact-name">
                                       <input id="contact_name" type="text" placeholder="Credit card info" [(ngModel)] ="creditcardinfo"  name="creditcardinfo" />
                                       </p>
                                       <p class="contact-name">
-                                        <input id="contact_name" type="text" placeholder="Birthdate (dd/mm/yy)" [(ngModel)] ="birthdate"  name="birthdate" />
+                                        <input id="contact_name" type="date" placeholder="Birthdate" [(ngModel)] ="clientbirthdate"  name="birthdate" />
                                         </p>
                             <p class="contact-submit" style="margin-left:500px !important;">
                               <button type="submit"  style = "margin-top:15px !important;" class="button">Register</button>
@@ -57,37 +57,37 @@
                   <div class="span3" style="margin-top:15px !important;"id="tab1">
                       <form id="contact-form" style = "width:1100px !important;" (submit) = "onRegisterSubmitbProvider()">
                           <p class="contact-name">
-                            <input id="contact_name" type="text" placeholder="Username" [(ngModel)] ="username"  name="username" />
+                            <input id="contact_name" type="text" placeholder="Username" [(ngModel)] ="bproviderusername"  name="username" />
                             </p>
                             <p class="contact-name">
-                              <input id="contact_email" type="password" placeholder="Password"  [(ngModel)] ="password" name="password" />
+                              <input id="contact_email" type="password" placeholder="Password"  [(ngModel)] ="bproviderpassword" name="password" />
                             </p>
                             <p class="contact-name">
-                              <input id="contact_name" type="text" placeholder="First name" [(ngModel)] ="firstname"  name="firstname" />
+                              <input id="contact_name" type="text" placeholder="First name" [(ngModel)] ="bproviderfirstname"  name="firstname" />
                               </p>
                               <p class="contact-name">
-                                <input id="contact_name" type="text" placeholder="Last name" [(ngModel)] ="lastname"  name="lastname" />
+                                <input id="contact_name" type="text" placeholder="Last name" [(ngModel)] ="bproviderlastname"  name="lastname" />
                                 </p>
                                 <p class="contact-name">
-                                  <input id="contact_name" type="text" placeholder="Email" [(ngModel)] ="email"  name="email" />
+                                  <input id="contact_name" type="text" placeholder="Email" [(ngModel)] ="bprovideremail"  name="email" />
                                   </p>
                                   <p class="contact-name">
-                                    <input id="contact_name" type="text" placeholder="Birthdate (dd/mm/yy)" [(ngModel)] ="birthdate" name="birthdate" />
+                                    <input id="contact_name" type="date" placeholder="Birthdate(dd/mm/yy)" [(ngModel)] ="bproviderbirthdate" name="birthdate" />
                                     </p>
                                     <p class="contact-name">
                                       <input id="contact_name" type="text" placeholder="Business name" [(ngModel)] ="businessName"  name="businessName" />
                                       </p>
                                       <p class="contact-name">
-                                        <input id="contact_name" type="text" placeholder="Business location" [(ngModel)] ="location"  name="location" />
+                                        <input id="contact_name" type="text" placeholder="Business location" [(ngModel)] ="bproviderlocation"  name="location" />
                                         </p>
                                         <p class="contact-name">
-                                          <input id="contact_name" type="text" placeholder="Business phone number" [(ngModel)] ="phone"  name="phone" />
+                                          <input id="contact_name" type="text" placeholder="Business phone number" [(ngModel)] ="bproviderphone"  name="phone" />
                                           </p>
                                           <p class="contact-name">
-                                            <textarea id="contact_message" placeholder="Info" name="info" rows="4" cols="40" [(ngModel)] ="info"></textarea>
+                                            <textarea id="contact_message" placeholder="Info" name="info" rows="4" cols="40" [(ngModel)] ="bproviderinfo"></textarea>
                                             </p>
                                             <p class="contact-name">
-                                              <textarea id="contact_message" placeholder="Description" name="description" rows="15" cols="40" [(ngModel)] ="description"></textarea>
+                                              <textarea id="contact_message" placeholder="Description" name="description" rows="15" cols="40" [(ngModel)] ="bproviderdescription"></textarea>
                                               </p>
                             <p class="contact-submit" style="margin-left:500px !important;">
                               <button type="submit"  style = "margin-top:15px !important;" class="button">Register</button>
