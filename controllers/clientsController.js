@@ -85,6 +85,9 @@ client.findOne({uid:req.user._id},(err,newClient)=>{
 	if(req.body.birthdate) {
 		newClient.birthdate = req.body.birthdate;
 	}
+  if(req.body.phone) {
+    newClient.phone = req.body.phone;
+  }
 
 	newClient.save((err,res)=>{
 	});

@@ -1,0 +1,110 @@
+<div id="work" class="page">
+
+<!-- Contact Section -->
+<div id="contact" class="page">
+<div class="container">
+    <!-- Title Page -->
+    <div class="row">
+        <div class="span12">
+            <div class="title-page">
+                <h2 class="title">Edit Your Profile</h2>
+            </div>
+        </div>
+    </div>
+    <!-- End Title Page -->
+
+    <!-- Contact Form -->
+    <div class="row">
+        <div class="span3">
+            <div class="contact-details">
+                <h3>Your Profile</h3>
+                <ul>
+
+                    <li>Username: {{Cusername}}</li>
+                    <li>First Name: {{CFirstname}}</li>
+                    <li>Last Name: {{CLastname}}</li>
+                    <li>Email: {{Cemail}}</li>
+                    <li>Address: {{Clocation}}</li>
+                    <li>Phone Number: {{Cphone}}</li>
+                    <li>CreditCard: {{CCreditCardInfo}}</li>
+                    <li>Birthdate: {{Cbdate}}</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="span6">
+                <div class="tabbable">
+
+                    <ul class="nav nav-tabs" style="width:1300px;" id="myTab">
+                          <li class="active"><a  href="#editProfile" data-toggle="tab">Edit Profile </a></li>
+                        <li><a href="#changePassword" data-toggle="tab">change password</a></li>
+                    </ul>
+
+                    <div class="tab-content" style="width:1300px !important;">
+
+                        <div class="tab-pane fade in" id="changePassword">
+                       <ul>
+                        <div >
+                            <form (submit)="onClientsChangePasswordSubmit()" id="contact-form" class="contact-form" >
+                <p class="contact-Uname">
+                    <input id="contact_Uname" type="password" [(ngModel)]="currentPassword" placeholder="Current Password" value="" name="currentPassword" />
+                </p>
+                <p class="contact-pass">
+                    <input id="contact_pass" type="password" [(ngModel)]="newPassword" placeholder="New Password" value="" name="newPassword" />
+                </p>
+
+                <p class="contact-phone">
+                    <input id="contact_phone" type="password" [(ngModel)]="newPasswordValidation" placeholder="New Password Validation" value="" name="newPasswordValidation" />
+                </p>
+                <p class="contact-submit">
+                    <!--a id="contact-submit" class="submit" href="#">Save Your Changes</a-->
+                  <input type ="submit" class = "submit" value = "Save Your Changes">
+                </p>
+
+                <div id="response">
+
+                </div>
+            </form>
+                        </div>
+                       </ul>
+                        </div>
+
+
+                        <div class="tab-pane fade in active" id="editProfile">
+                        <div>
+                        <form (submit)="onClientseditProfileSubmit()" id="contact-form"  >
+                <p class="contact-Uname">
+                    <input id="contact_Uname" type="text" [(ngModel)]="Firstname" placeholder="First Name" value="" name="Firstname" />
+                </p>
+                <p class="contact-pass">
+                    <input id="contact_pass" type="text" [(ngModel)]="Lastname" placeholder="Last Name" value="" name="Lastname" />
+                </p>
+
+                <p class="contact-email">
+                    <input id="contact_email" type="email" [(ngModel)]="email" placeholder="Email" value="" name="email" />
+                </p>
+                <p class="contact-bName">
+                    <input id="contact_bName" type="text" [(ngModel)]="creditCArdInfo" placeholder="Credit Card Info" value="" name="creditCArdInfo" />
+                </p>
+                <p class="contact-location">
+                    <input id="contact_location" type="text" [(ngModel)]="address" placeholder="address" value="" name="address" />
+                </p>
+                <p class="contact-phone">
+                    <input id="contact_phone" type="text" [(ngModel)]="phone" placeholder="Phone Number" value="" name="phone" />
+                </p>
+                <p class="contact-date">
+                    <input id="contact_date" type="date" [(ngModel)]="birthdate" placeholder="Birthdate" value="" name="birthdate" />
+                </p>
+
+
+
+                <p class="contact-submit">
+                    <!--a id="contact-submit" class="submit" href="#">Save Your Changes</a-->
+                  <input type ="submit" class = "submit" value = "Save Your Changes">
+                </p>
+
+                <div id="response">
+
+                </div>
+            </form>
+                        </div>

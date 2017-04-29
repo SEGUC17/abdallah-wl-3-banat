@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceeditService } from '../../services/serviceedit.service';
-import {ViewservicesService } from '../../services/viewservices.service';
+import { GetBproviderService } from '../../services/get-bprovider.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
 
@@ -21,12 +21,12 @@ export class EditserviceComponent implements OnInit {
   Service:any;
 
   constructor(private serviceeditservice : ServiceeditService,
-    private viewservicesservice:ViewservicesService,
     private router:Router,
+    private getBproviderService: GetBproviderService,
     private flashmessage:FlashMessagesService) { }
 
   ngOnInit() {
-     this.viewservicesservice.getBusiness().subscribe(business=>{this.business=business.result});
+     this.getBproviderService.getBprovider().subscribe(business=>{this.business=business.Business});
   }
 
 
@@ -54,6 +54,8 @@ export class EditserviceComponent implements OnInit {
 
     localStorage.removeItem('serviceid');
   }
+
+
 
 
 }

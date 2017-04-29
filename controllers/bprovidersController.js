@@ -29,10 +29,27 @@ var bprovidersController = {
    viewQuestions: function(req, res){
   var bid = req.param('businessid');
  business.findOne({_id: bid}, (err, Business) => {
-    if(err) return res.json({msg: "Invalid parameter"});
-    if(!Business) return res.json({msg: "Business not found"});
+    if(err) return res.json({msg: 'Invalid parameter'});
+    if(!Business) return res.json({msg: 'Business not found'});
     res.send(Business.questions);
   });
+},
+editbproviderpicture: function(req,res){
+  var bid = req.param('businessid');
+  console.log(bid);
+  business.findOne({_id:bid},(err,Business)=>{
+    if(err) return res.json({success:false,msg:'Invalid Parameters'});
+    if(!Business) return res.json({success:false,msg:'Business not found'});
+    else{
+      if(req.body.picture)
+        Business.profilepicture = req.body.picture;
+      Business.save((err,newBusiness)=>{
+      if(err) return res.json({success:false,msg:'Invalid Parameters'});
+      
+      return res.json({success:true,Business:newBusiness});
+      })
+    }
+  })
 },
 
 ///////////////////////////////////        Database Functions 		//////////////////////////////////

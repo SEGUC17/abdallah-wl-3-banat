@@ -44,7 +44,7 @@
                         <div *ngFor="let business of businesses">
                                 <li style = "float: left; margin-left: 10px;" >
                                 <br>
-                                    <figure> <img style = "height:300px; !important" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                                    <figure> <img style = "height:300px !important;width:200px !important;" src={{business.profilepicture}}>
                                         <br>
                                             Name: {{business.businessName}} <br>
                                             Rating: {{business.rating}} <br>

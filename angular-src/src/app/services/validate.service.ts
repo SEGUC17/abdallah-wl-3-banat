@@ -40,7 +40,7 @@ AddService(user){
  validateClient(Clients){
    if(Clients.Firstname != undefined || Clients.email != undefined || Clients.Lastname != undefined || 
    Clients.password != undefined || Clients.passwordValidation!= undefined||Clients.newPassword!=undefined
-   ||Clients.creditCArdInfo!= undefined){
+   ||Clients.creditCArdInfo!= undefined || Clients.birthdate != undefined || !isNaN(Clients.phone)){
       return true;
     } else {
       return false;
