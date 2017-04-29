@@ -13,13 +13,13 @@ export class ViewservicesService {
   	this.AuthToken = localStorage.getItem('id_token');
   }
 
-  getBusiness(){
+  /*getBusiness(){
   		let headers = new Headers();
   		this.loadToken();
   		headers.append('Content-Type','application/json');
   		headers.append('Authorization',this.AuthToken);
   		return this.http.get('http://localhost:8080/bproviders/getbusiness',{headers:headers}).map(res=>res.json());
-  }
+  }*/
 
   
 

@@ -85,6 +85,9 @@ client.findOne({uid:req.user._id},(err,newClient)=>{
 	if(req.body.birthdate) {
 		newClient.birthdate = req.body.birthdate;
 	}
+  if(req.body.phone) {
+    newClient.phone = req.body.phone;
+  }
 
 	newClient.save((err,res)=>{
 	});
@@ -235,7 +238,7 @@ checkEventValidity:function(req,res){
   var date = moment();
   var chosenDate = moment(req.body.start);
   if(chosenDate.diff(date,'minutes')< 0)
-  return res.json({success:false,isValid:false});
+  return res.json({success:false,isValid:false,msg:'The chosen date has already passed!'});
   client.findOne({uid:req.user._id},function(err,Client){
   if(err) return res.json({success:false,msg:'Invalid parameters'});
   if(!Client) return res.json({success:false,msg:'You must be logged in as a client to check the validity of an event',isValid:false});
@@ -263,7 +266,7 @@ checkEventValidity:function(req,res){
     }
 
     if(isValid) return res.json({isValid:true});
-    return res.json({isValid:false});
+    return res.json({isValid:false,msg:'Maximum number of clients for this slot has been reached!'});
   })
 })
 },
@@ -325,7 +328,7 @@ clientsReserve:function(req,res){
   source: req.body.token,
 }, function(err, charge) {
   if(err)
-  return res.json({success:false,msg:'There was an error completing the desired payment'});
+  return res.json({success:false,msg:'There was an error completing the desired payment'}); 
   var updatedService;
   business.findOne({_id:businessId},function(err,Business){
     if(err) return res.json({success:false,msg:'There was an error completing the desired payment'});

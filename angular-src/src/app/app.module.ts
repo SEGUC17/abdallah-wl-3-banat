@@ -39,6 +39,7 @@ import {PostReviewsService} from './services/post-reviews.service';
 import {AskquestionService} from './services/askquestion.service';
 import {ClientsService} from './services/clients.service';
 import {ClientsChangePasswordService} from './services/clients-change-password.service';
+import {EditpComponent} from './components/editp/editp.component';
 
 
 
@@ -55,7 +56,8 @@ const appRoutes: Routes =  [
   {path:'GBdetails',component:GuestbusinessdetailsComponent},
   {path:'EditBpProfile',component:EditbpProfileComponent},
   {path:'AddService',component:AddServiceComponent},
-  {path:'Profile',component:ClientComponent}
+  {path:'Profile',component:ClientComponent},
+  {path:'editProfile',component:EditpComponent}
 
 
 ]
@@ -75,7 +77,8 @@ const appRoutes: Routes =  [
     GuestbusinessdetailsComponent,
     EditbpProfileComponent,
     AddServiceComponent,
-    ClientComponent
+    ClientComponent,
+    EditpComponent
   ],
   imports: [
     BrowserModule,

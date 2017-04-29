@@ -43,7 +43,7 @@ export class ReservationComponent implements OnInit {
           this.isValid = true;
 
         }else{
-        this.flashMessage.show('The desired slot is not available to be reserved! Please choose another slot!',{cssClass:'alert-danger',timeout:3000});
+        this.flashMessage.show(data.msg,{cssClass:'alert-danger',timeout:3000});
       }
     })
   }

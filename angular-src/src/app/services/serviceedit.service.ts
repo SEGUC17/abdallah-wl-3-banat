@@ -21,5 +21,6 @@ export class ServiceeditService {
   		headers.append('Authorization',this.AuthToken);
   		return this.http.post('http://localhost:8080/bproviders/editservices/'+bid+'/'+serviceid,service,{headers:headers}).map(res=>res.json());
   	}
+
   	
 }

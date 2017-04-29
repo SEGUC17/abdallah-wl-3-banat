@@ -45,6 +45,31 @@ this.authToken = token;
   loggedIn(){
     return tokenNotExpired('id_token');
   }
+  isClient(){
+    if(this.loggedIn()){
+      var user = JSON.parse(localStorage.getItem('user'));
+      if(user.type == 0){
+        return true;
+      }
+    else{
+      return false;
+    }
+  }
+    return false;
+  }
+  isBprovider(){
+      if(this.loggedIn()){
+        var user = JSON.parse(localStorage.getItem('user'));
+        if(user.type == 1){
+          return true;
+        }
+      else{
+        return false;
+      }
+    }
+      return false;
+
+  }
   registerClient(client){
     let headers = new Headers();
     headers.append('Content-type','application/json');

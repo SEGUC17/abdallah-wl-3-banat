@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {AuthService} from '../../services/auth.service';
+import {BproviderService} from '../../services/bprovider.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   password:String;
   constructor(private flashMessage:FlashMessagesService,
   private router:Router,
-  private authService:AuthService) {}
+  private authService:AuthService,
+  private bproviderservice:BproviderService) {}
 
   ngOnInit() {
   }
@@ -30,8 +32,14 @@ export class LoginComponent implements OnInit {
       this.authService.storeUserData(data.token,data.user);
       if(data.user.type == 0)
       this.router.navigate(['Profile']);
-      else if(data.user.type == 1){
+      else if(data.user.type == 1) //declined business
+    {
+     this.bproviderservice.FindBPandB().subscribe(result =>{
+     console.log(result.business);
+    localStorage.setItem('isDeclined',result.business.isDeclined);
       this.router.navigate(['Bprovider']);
+    }
+  );
 
     }
       else this.router.navigate(['Admin']);

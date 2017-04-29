@@ -36,5 +36,6 @@ router.get('/viewServices/:bid',passport.authenticate('jwt',{session:false}),bpr
 router.post('/createBusiness',passport.authenticate('jwt',{session:false}),bprovidersController.createBusinessIfDeclined);
 router.get('/BPandB',passport.authenticate('jwt',{session:false}),bprovidersController.getBpandB);
 router.get('/deleteAnnouncement/:index', passport.authenticate('jwt', {session:false}), bprovidersController.deleteAnnouncement);
+router.post('/bproviderpicture/:businessid',passport.authenticate('jwt',{session:false}),bprovidersController.editbproviderpicture);
 
 module.exports = router;

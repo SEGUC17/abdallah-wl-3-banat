@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {ClientsService} from '../../services/clients.service';
 import {Router} from '@angular/router';
-import {ClientsChangePasswordService} from '../../services/clients-change-password.service';
 import {ValidateService} from '../../services/validate.service';
 import{FlashMessagesService} from 'angular2-flash-messages';
 import { ViewService } from '../../services/view.service';
@@ -15,10 +14,7 @@ import { ViewService } from '../../services/view.service';
 })
 export class ClientComponent implements OnInit {
 profile:Object;
-username:string;
-currentPassword:string;
-newPassword:string;
-newPasswordValidation:string;
+
 
 Firstname: any;
 Lastname: any;
@@ -37,7 +33,7 @@ businesses:any;
 searchedBusinesses:any;
 
 
-  constructor(private authService:AuthService,private changepw:ClientsChangePasswordService ,
+  constructor(private authService:AuthService,
   private ClientsService :ClientsService ,private viewService:ViewService, private router:Router,private validateService:ValidateService,private flashMessages:FlashMessagesService) { }
 
 
@@ -87,35 +83,11 @@ onButtonClicked(event){
   console.log(this.businesses)
 }
 
-  onClientseditProfileSubmit(){
-    const client = {Firstname:this.Firstname,
-    Lastname:this.Lastname,
-    creditCArdInfo:this.creditCArdInfo,
-    address:this.address,
-	email:this.email};
-    if(!(this.validateService.validateClient(client))){
-      this.flashMessages.show('ERROR',{cssClass:'alert-danger',timeout:3000});
-    }
-    else{
-   this.ClientsService.editP(this.Firstname,this.Lastname,this.creditCArdInfo,
-   this.address,this.email).subscribe(data => {
-   	      location.reload();
-
-   })
-
-
-  this.flashMessages.show('SUCCESS',{cssClass:'alert-success',timeout:3000});
-    }
-
-}
 
 
 
-  onClientsChangePasswordSubmit(){
-   this.changepw.editPassword(this.username,this.currentPassword,this.newPassword,this.newPasswordValidation).subscribe(data => {
-     location.reload();
-   })
-  }
+
+ 
 
 
 

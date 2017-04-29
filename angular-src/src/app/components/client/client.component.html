@@ -2,10 +2,10 @@
     <div class="overlay"></div>
 
     <div class="slider-text">
-    	<div></div>
+        <div></div>
     </div>
 
-	<div class="control-nav">
+    <div class="control-nav">
         <a id="prevslide" class="load-item"><i class="font-icon-arrow-simple-left"></i></a>
         <a id="nextslide" class="load-item"><i class="font-icon-arrow-simple-right"></i></a>
         <ul id="slide-list"></ul>
@@ -14,29 +14,21 @@
     </div>
 </div>
 <div id="work" class="page">
-	<div class="container">
-    	<!-- Title Page -->
-        <div class="row">
-            <div class="span12">
-                <div class="title-page">
-                    <h2 class="title">Okhrog.com</h2>
-                    <h3 class="title-description"> Suggested outings. </h3>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        <!-- Title Page -->
+
         <!-- End Title Page -->
 
         <!-- Portfolio Projects -->
-        <div class="span6">
-
+        <div>
+              <h1 class="title" style="text-align: center;"><span class="color-text">{{profilefirstname}}  </span><a [routerLink]="['/editProfile']"><span class="font-icon-edit"></span></a>
+        </h1>
                 <div class="tabbable">
 
                     <ul class="nav nav-tabs" style="width:1300px;" id="myTab">
-                    	<li class="active"><a href="#viewall" data-toggle="tab">All Businesses</a></li>
+                        <li class="active"><a href="#viewall" data-toggle="tab">All Businesses</a></li>
                         <li><a (click) = "topBusinesses()" href="#viewtop" data-toggle="tab">Top 10 Businesses</a></li>
-                        <li><a href="#changePassword" data-toggle="tab">change password</a></li>
-                        <li><a (click) = "onClientseditProfileSubmit()" href="#editProfile" data-toggle="tab">Edit Profile</a></li>
-                        <li><a (click) = "onShowProfile()" href="#viewClientProfile" data-toggle="tab">Profile</a></li>
+
                         <li><a (click) = "searchForBusiness()" href="#search" data-toggle="tab">Search</a></li>
 
 
@@ -48,7 +40,7 @@
                         <div *ngFor="let business of businesses">
                                 <li style = "float: left; margin-left: 10px;" >
                                 <br>
-                                    <figure> <img style = "height:300px; !important" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                                    <figure> <img style = "height:300px !important;width:200px !important;" src={{business.profilepicture}}>
                                         <br>
                                             Name: {{business.businessName}} <br>
                                             Rating: {{business.rating}} <br>
@@ -67,7 +59,7 @@
                         <div *ngFor="let TopBusiness of TopBusinesses">
                         <li style = "float: left; margin-left: 10px;" >
                         <br>
-                           <figure> <img style = "height:300px; !important" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                           <figure> <img style = "height:300px !important;width:200px !important;" src={{TopBusiness.profilepicture}}>
                            <br>
                              Name: {{TopBusiness.businessName}} <br>
                              Rating: {{TopBusiness.rating}} <br>
@@ -80,84 +72,13 @@
                         </ul>
                         </div>
 
-                        <div class="tab-pane fade in" id="changePassword">
-                       <ul>
-                        <div >
-                            <form (submit)="onClientsChangePasswordSubmit()" id="contact-form" class="contact-form" >
-            	<p class="contact-Uname">
-            		<input id="contact_Uname" type="text" [(ngModel)]="currentPassword" placeholder="Current Password" value="" name="currentPassword" />
-                </p>
-                <p class="contact-pass">
-                	<input id="contact_pass" type="text" [(ngModel)]="newPassword" placeholder="New Password" value="" name="newPassword" />
-                </p>
-
-                <p class="contact-phone">
-            		<input id="contact_phone" type="text" [(ngModel)]="newPasswordValidation" placeholder="New Password Validation" value="" name="newPasswordValidation" />
-                </p>
-                <p class="contact-submit">
-                	<!--a id="contact-submit" class="submit" href="#">Save Your Changes</a-->
-                  <input type ="submit" class = "submit" value = "Save Your Changes">
-                </p>
-
-                <div id="response">
-
-                </div>
-            </form>
-                        </div>
-                       </ul>
-                        </div>
 
 
-                        <div class="tab-pane fade in" id="editProfile">
-                        <div>
-                       	<form (submit)="onClientseditProfileSubmit()" id="contact-form"  >
-            	<p class="contact-Uname">
-            		<input id="contact_Uname" type="text" [(ngModel)]="Firstname" placeholder="First Name" value="" name="Firstname" />
-                </p>
-                <p class="contact-pass">
-                	<input id="contact_pass" type="text" [(ngModel)]="Lastname" placeholder="Last Name" value="" name="Lastname" />
-                </p>
-
-                <p class="contact-email">
-                	<input id="contact_email" type="email" [(ngModel)]="email" placeholder="Email" value="" name="email" />
-                </p>
-                <p class="contact-bName">
-            		<input id="contact_bName" type="text" [(ngModel)]="creditCArdInfo" placeholder="Credit Card Info" value="" name="creditCArdInfo" />
-                </p>
-                <p class="contact-location">
-            		<input id="contact_location" type="text" [(ngModel)]="address" placeholder="address" value="" name="address" />
-                </p>
-                <p class="contact-phone">
-            		<input id="contact_phone" type="text" [(ngModel)]="phone" placeholder="Phone Number" value="" name="phone" />
-                </p>
 
 
-                <p class="contact-submit">
-                	<!--a id="contact-submit" class="submit" href="#">Save Your Changes</a-->
-                  <input type ="submit" class = "submit" value = "Save Your Changes">
-                </p>
-
-                <div id="response">
-
-                </div>
-            </form>
-                        </div>
-                        </div>
 
 
-                          <div class="tab-pane fade in" id="viewClientProfile">
-<!-- ROWAANNNNN'S PART -->
-                              <form (submit)="ngOnInit($event)">
 
-                              </form>
-
-                                <div >
- <li style="list-style: none;"><h4>First Name: {{profilefirstname}}<br>Last Name: {{profilelastname}}<br>Email: {{profileemail}}<br> Address: {{profileaddress}}<br>
- Phone: {{profilephone}}<br>Birthdate: {{profilebirthdate}}</h4> </li>
-
-<!--- akhrekk hina -->
-                                </div>
-                        </div>
                         <div class="tab-pane fade in" id="search">
 
                               <form (submit)="searchForBusiness($event)">
@@ -168,7 +89,7 @@
 
                                 <div *ngFor="let searchedBusiness of searchedBusinesses">
 
-                                        <figure> <img style = "height:300px; !important" src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300">
+                                        <figure> <img style = "height:300px !important;width:200px !important;" src={{searchedBusiness.profilepicture}}>
                                             <br>
                                                 Name: {{searchedBusiness.businessName}} <br>
                                                 Rating: {{searchedBusiness.rating}} <br>
